@@ -51,8 +51,6 @@ See `.ai/WOOCOMMERCE.md` for the full module breakdown and manual-removal steps.
 8. Go to WP Admin > Custom Fields > Sync to import field groups
 9. Build client-specific sections from the design
 
-See `.ai/NEW-PROJECT-CHECKLIST.md` for the full step-by-step.
-
 ---
 
 ## Key Conventions
@@ -77,8 +75,6 @@ bubble-stop/
 │   ├── VIDEO-SYSTEM.md          # Video field and helper documentation
 │   ├── WOOCOMMERCE.md           # Optional WooCommerce module — what's included, how to remove it
 │   ├── TYPOGRAPHY.md            # Type scale and heading conventions
-│   ├── NEW-PROJECT-CHECKLIST.md # Setup checklist for each project
-│   ├── NEW-PROJECT-SETUP.md     # Bootstrap script documentation
 │   └── THEME-ARCHITECTURE.md   # How the framework is structured
 ├── acf-json/                    # ACF field groups (auto-synced)
 ├── assets/
@@ -132,12 +128,10 @@ See `.ai/ACF-PATTERNS.md` for full field documentation.
 
 ## Documentation
 
-All documentation lives in `.ai/`. Read these before starting a new project:
+All project documentation lives in `.ai/`:
 
-1. `.ai/NEW-PROJECT-CHECKLIST.md` — setup steps
-2. `.ai/ACF-PATTERNS.md` — how to build sections + helper function signatures
-3. `.ai/VIDEO-SYSTEM.md` — how to use the video renderer
-4. `.ai/WOOCOMMERCE.md` — optional WooCommerce module: what ships, how to remove it
-5. `.ai/TYPOGRAPHY.md` — type scale and heading conventions
-6. `.ai/NEW-PROJECT-SETUP.md` — bootstrap script reference
-7. `.ai/THEME-ARCHITECTURE.md` — how the framework is structured
+1. `.ai/ACF-PATTERNS.md` — how to build sections + helper function signatures
+2. `.ai/VIDEO-SYSTEM.md` — how to use the video renderer
+3. `.ai/WOOCOMMERCE.md` — optional WooCommerce module: what ships, how to remove it
+4. `.ai/TYPOGRAPHY.md` — type scale and heading conventions
+5. `.ai/THEME-ARCHITECTURE.md` — how the framework is structured

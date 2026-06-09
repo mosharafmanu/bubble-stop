@@ -23,8 +23,6 @@ bubble-stop/
 ├── .ai/                          # AI documentation (this folder)
 │   ├── ACF-PATTERNS.md           # How to build sections + all helper function signatures
 │   ├── VIDEO-SYSTEM.md           # Video field and helper documentation
-│   ├── NEW-PROJECT-CHECKLIST.md  # New project setup steps
-│   ├── NEW-PROJECT-SETUP.md      # Bootstrap script documentation
 │   └── THEME-ARCHITECTURE.md    # This file
 ├── acf-json/                     # ACF field groups (auto-synced from WP Admin)
 │   ├── group_flexible_content.json  # Flexible Content — add layouts per project
