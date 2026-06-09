@@ -417,74 +417,7 @@ h6,.h6-style {
 	}
 }
 
-/* Pagination Style Start */
 
-.pagination {
-	margin-top: 6.25rem;
-}
-.pagination .page-numbers {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	column-gap: 1.875rem; /* 30px */
-}
-.pagination .page-numbers .page-numbers {
-	text-decoration: none;
-	color: var(--bubb-color-dark);
-	width: 2.375rem;
-	height: 2.375rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border: 0.063rem solid transparent;
-	border-radius: 50%;
-	font-weight: 400;
-	transition: background-color var(--bubb-transition), color var(--bubb-transition);
-}
-.pagination .page-numbers .page-numbers:not(.current):hover {
-	background-color: var(--bubb-color-subtle);
-	color: var(--bubb-color-primary);
-}
-.pagination .page-numbers .page-numbers.current {
-	color: var(--bubb-color-light);
-	background-color: var(--bubb-color-primary);
-	font-weight: 700;
-}
-.pagination .prev span, .pagination .next span {
-	display: flex;
-	align-items: center;
-}
-
-@media only screen and (max-width:991px) {
-
-	.pagination{
-		margin-top: 4.375rem; /* 70px */
-	}
-
-}
-@media only screen and (max-width:767px) {
-
-	.pagination{
-		margin-top: 3.125rem; /* 50px */
-	}
-	.pagination .page-numbers {
-		column-gap: .625rem; /* 10px */
-	}
-	.pagination .page-numbers .page-numbers {
-		width: 2rem; /* 32px */
-		height: 2rem; /* 32px */
-		font-size: 0.875rem; /* 14px */
-	}
-	.pagination .prev svg,
-	.pagination .next svg {
-		width: 1rem; /* 16px */
-	}
-}
-
-/* Pagination Style End */
 
 /* ─────────────────────────────────────────────────────
    CONTENT TYPOGRAPHY
