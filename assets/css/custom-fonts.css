@@ -1,0 +1,36 @@
+/*
+ * Bubble Stop local webfonts.
+ *
+ * BDO Grotesk is a commercial font supplied with the project. Keep these
+ * files local and confirm that the font licence permits web embedding.
+ */
+
+@font-face {
+	font-family: 'BDO Grotesk';
+	src:
+		url('../fonts/BDOGrotesk-Light.woff2') format('woff2'),
+		url('../fonts/BDOGrotesk-Light.woff') format('woff');
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'BDO Grotesk';
+	src:
+		url('../fonts/BDOGrotesk-Regular.woff2') format('woff2'),
+		url('../fonts/BDOGrotesk-Regular.woff') format('woff');
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'BDO Grotesk';
+	src:
+		url('../fonts/BDOGrotesk-Medium.woff2') format('woff2'),
+		url('../fonts/BDOGrotesk-Medium.woff') format('woff');
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+}

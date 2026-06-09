@@ -1,0 +1,86 @@
+/*!
+Theme Name: Bubble Stop
+Theme URI:
+Author:
+Author URI:
+Description:
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: bubble-stop
+Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexible-content, starter
+*/
+
+/*
+=============================================================================
+Design Tokens
+=============================================================================
+*/
+
+:root {
+
+	/* Brand Colors — Bubble Stop Figma palette */
+    --bubb-color-primary:   #032143;   /* Deep navy — navigation and primary brand surfaces */
+    --bubb-color-secondary: #636160;   /* Warm gray — display headings and neutral controls */
+    --bubb-color-accent:    #fdb46e;   /* Peach — icon circles and warm brand accents */
+    --bubb-color-active:    #4eb8f9;   /* Sky blue — selected categories and active states */
+    --bubb-color-highlight: #c8b3fb;   /* Soft lilac — decorative brand surfaces */
+
+    /* Neutral */
+    --bubb-color-dark:   #3a3a3a;      /* Primary body copy */
+    --bubb-color-mid:    #636160;      /* Muted text, borders, and secondary surfaces */
+    --bubb-color-subtle: #f3f8ff;      /* Cool page and card background tint */
+    --bubb-color-light:  #ffffff;      /* White / reversed-text backgrounds */
+
+    /* Semantic aliases — wire once, change via brand colors above */
+    --bubb-color-text:       var(--bubb-color-dark);
+    --bubb-color-background: var(--bubb-color-subtle);
+    --bubb-color-heading:    var(--bubb-color-secondary);
+    --bubb-color-link:       var(--bubb-color-primary);
+    --bubb-color-button:     var(--bubb-color-secondary);
+    --bubb-color-button-hover: var(--bubb-color-primary);
+
+    /* Typography */
+    --bubb-font-heading: 'Urbanist', sans-serif;
+    --bubb-font-body:    'BDO Grotesk', 'Urbanist', sans-serif;
+    --bubb-font-ui:      'BDO Grotesk', 'Urbanist', sans-serif;
+
+	/* Container */
+    --bubb-container-max:    86.25rem;  /* 1380px */
+    --bubb-container-gutter: 1.875rem;  /* 30px */
+
+
+	/* Buttons */
+    --bubb-btn-padding-y:   0.5rem;     /* 8px + border produces the Figma 50px control height */
+    --bubb-btn-padding-x:   2.25rem;    /* 36px */
+    --bubb-btn-font-size:   1.125rem;   /* 18px */
+    --bubb-btn-font-weight: 300;
+    --bubb-btn-border-radius: 3.0625rem; /* 49px */
+
+	/* Border Radius */
+    --bubb-border-radius:    0.625rem;   /* 10px */
+    --bubb-border-radius-sm: 0.375rem;   /* 6px  */
+
+
+	/* Transition */
+    --bubb-transition: 0.3s ease;
+
+
+    /*
+	-----------------------------------------------------------------------
+       Breakpoints (reference)
+       CSS custom properties can't be used in @media queries.
+       xs: 0  sm: 576  md: 768  lg: 992  xl: 1200  xxl: 1400
+    -----------------------------------------------------------------------
+	*/
+}
+
+/*
+=============================================================================
+Client Project Styles
+=============================================================================
+Add all project-specific overrides and custom styles below.
+*/

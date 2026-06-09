@@ -1,0 +1,23 @@
+/**
+ * Bubble Stop — Cart Instant Update (WooCommerce)
+ *
+ * Pairs with assets/js/bubble-stop-cart-instant-update.js. Deliberately
+ * standalone — kept independent of bubble-stop-quantity and
+ * bubble-stop-woocommerce so it stays intact (and is removable on its
+ * own) even when other WC cart styling is themed per project.
+ *
+ * @package bubble-stop
+ */
+
+/* Hides WC's "Update Cart" button once bubble-stop-cart-instant-update.js
+   confirms its instant-update listener is live (it adds this class to `body`
+   — not the button — because WC replaces the button's element wholesale on
+   every AJAX refresh; an element-level class would vanish after the first
+   one). Every quantity change already triggers this exact button's native
+   click automatically at that point, so showing it too would just be a
+   second, permanently-"disabled-looking" control. Stays visible — and the
+   only way to apply a changed quantity — for the rare no-JS visitor, who
+   never gets this class. */
+body.mc-cart-instant-update .woocommerce-cart-form [name="update_cart"] {
+	display: none;
+}
