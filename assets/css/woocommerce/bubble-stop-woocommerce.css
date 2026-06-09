@@ -33,17 +33,6 @@
 	padding-bottom: 5rem;
 }
 
-/* Cart/checkout/account pages render through the generic page template
-   (content-page.php), which wraps everything in `.post-inner` — a
-   reading-width constraint (max-width: 50rem) meant for prose/blog
-   content. WC's 2-column layouts need the full container width, so lift
-   it wherever WC adds its `woocommerce-page` body class (cart, checkout,
-   my-account, shop — anywhere `.post-inner` could otherwise squeeze them
-   into a single narrow column). */
-.woocommerce-page .post-inner {
-	max-width: none;
-}
-
 /* Archive page title */
 .wc-archive-title {
 	margin-bottom: 0.5rem;
@@ -856,7 +845,8 @@
 .woocommerce-cart .woocommerce:has(.woocommerce-cart-form) {
 	display: grid;
 	grid-template-columns: 1fr 22rem;
-	gap: 3rem;
+	column-gap: 3rem;
+	row-gap: 1.5rem;
 	align-items: start;
 }
 
@@ -868,6 +858,11 @@
    it prints, e.g. "Cart updated") above the table/totals row. */
 .woocommerce-cart .woocommerce-notices-wrapper {
 	grid-column: 1 / -1;
+	margin-bottom: 0;
+}
+
+.woocommerce-cart .woocommerce-notices-wrapper:empty {
+	display: none;
 }
 
 /* "Update Cart" button visibility for the instant-update flow now lives in
@@ -879,6 +874,15 @@
 	font-size: 1.0625rem;
 	color: var(--bubb-color-text);
 	margin-bottom: 1.25rem;
+}
+
+.woocommerce-cart .entry-header {
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.woocommerce-cart .entry-content {
+	margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 /* Cart table — `margin: 0` resets the `.entry-content table { margin: 1.75rem 0 }`
@@ -893,19 +897,22 @@
 	border-collapse: collapse;
 	font-size: 0.9375rem;
 	margin: 0;
+	background-color: var(--bubb-color-light);
+	border: 0.0625rem solid #d7dce4;
 }
 
 .woocommerce table.shop_table th {
 	text-align: left;
 	padding: 0.75rem 1rem;
 	font-weight: 700;
-	border-bottom: 0.125rem solid var(--bubb-color-subtle);
+	background-color: #eef5ff;
+	border-bottom: 0.125rem solid #d7dce4;
 	color: var(--bubb-color-text);
 }
 
 .woocommerce table.shop_table td {
 	padding: 1.25rem 1rem;
-	border-bottom: 0.0625rem solid var(--bubb-color-subtle);
+	border-bottom: 0.0625rem solid #d7dce4;
 	vertical-align: middle;
 }
 
@@ -914,7 +921,7 @@
    bleeds into them — and on touch devices :hover sticks after a tap,
    leaving a row looking permanently "selected". Switch it off here. */
 .woocommerce-cart .entry-content table.shop_table tbody tr:hover td {
-	background-color: transparent;
+	background-color: var(--bubb-color-light);
 }
 
 /* Product image in cart row */
@@ -946,8 +953,8 @@
 /* Cart totals box — bordered + lightly elevated like .wc-product-card so it
    reads as its own card against the white page rather than blending into it. */
 .cart_totals {
-	background-color: var(--bubb-color-subtle);
-	border: 0.0625rem solid rgba(0, 0, 0, 0.06);
+	background-color: var(--bubb-color-light);
+	border: 0.0625rem solid #d7dce4;
 	border-radius: var(--bubb-border-radius);
 	padding: 1.75rem;
 	box-shadow: 0 1px 3px color-mix(in srgb, var(--bubb-color-dark) 5%, transparent);
@@ -1033,6 +1040,199 @@
 	min-width: 10rem;
 }
 
+/* Modern cart presentation: keep WooCommerce's accessible table markup,
+   but visually separate each product into a card instead of one continuous
+   spreadsheet. */
+.woocommerce-cart .woocommerce-cart-form table.cart {
+	border: 0;
+	border-collapse: separate;
+	border-spacing: 0 1rem;
+	background: transparent;
+}
+
+.woocommerce-cart table.cart thead th {
+	padding: 0 1.25rem 0.5rem;
+	background: transparent;
+	border: 0;
+	color: var(--bubb-color-mid);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.woocommerce-cart table.cart tbody tr:not(:last-child) td {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	background: var(--bubb-color-light);
+	border-top: 0.0625rem solid #d7dce4;
+	border-bottom: 0.0625rem solid #d7dce4;
+}
+
+.woocommerce-cart table.cart tbody tr:not(:last-child) td:first-child {
+	border-left: 0.0625rem solid #d7dce4;
+	border-radius: 1rem 0 0 1rem;
+}
+
+.woocommerce-cart table.cart tbody tr:not(:last-child) td:last-child {
+	border-right: 0.0625rem solid #d7dce4;
+	border-radius: 0 1rem 1rem 0;
+}
+
+.woocommerce-cart table.cart td.product-remove {
+	width: 3.25rem;
+	padding-right: 0.5rem;
+	padding-left: 1.25rem;
+}
+
+.woocommerce-cart table.cart .product-remove a {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	background: #f8fafc;
+	font-size: 1.125rem;
+}
+
+.woocommerce-cart table.cart .product-remove a:hover {
+	background: #fef2f2;
+}
+
+.woocommerce-cart table.cart td.product-thumbnail {
+	width: 7rem;
+	padding-right: 0.75rem;
+	padding-left: 0.5rem;
+}
+
+.woocommerce-cart table.cart .product-thumbnail img {
+	width: 5.75rem;
+	height: 5.75rem;
+	border-radius: 0.75rem;
+}
+
+.woocommerce-cart table.cart td.product-name {
+	padding-right: 1.5rem;
+}
+
+.woocommerce-cart table.cart td.product-name > a {
+	display: inline-block;
+	margin-bottom: 0.75rem;
+	color: var(--bubb-color-primary);
+	font-size: 1.0625rem;
+	font-weight: 600;
+	text-decoration-thickness: 0.0625rem;
+	text-underline-offset: 0.2em;
+}
+
+.woocommerce-cart table.cart .product-name dl.variation {
+	display: grid;
+	grid-template-columns: max-content minmax(0, 1fr);
+	gap: 0.25rem 0.625rem;
+	margin: 0;
+	color: var(--bubb-color-mid);
+	font-size: 0.875rem;
+	line-height: 1.45;
+}
+
+.woocommerce-cart table.cart .product-name dl.variation dt,
+.woocommerce-cart table.cart .product-name dl.variation dd {
+	float: none;
+	margin: 0;
+	padding: 0;
+}
+
+.woocommerce-cart table.cart .product-name dl.variation dt {
+	font-weight: 600;
+}
+
+.woocommerce-cart table.cart .product-name dl.variation dd p {
+	margin: 0;
+}
+
+.woocommerce-cart table.cart td.product-price,
+.woocommerce-cart table.cart td.product-subtotal {
+	font-size: 1rem;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.woocommerce-cart table.cart .quantity {
+	border-color: #d7dce4;
+	background: var(--bubb-color-light);
+}
+
+.woocommerce-cart table.cart .quantity .qty-btn {
+	background: #eef5ff;
+}
+
+.woocommerce-cart table.cart td.actions {
+	padding: 1.25rem;
+	background: var(--bubb-color-light);
+	border: 0.0625rem solid #d7dce4;
+	border-radius: 1rem;
+}
+
+.woocommerce-cart table.cart td.actions .coupon {
+	margin: 0;
+}
+
+.woocommerce-cart table.cart td.actions .coupon button {
+	min-width: 11rem;
+}
+
+.woocommerce-cart .cart-collaterals {
+	position: sticky;
+	top: 10.75rem;
+	margin-top: 3.75rem;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals {
+	float: none;
+	width: 100%;
+	padding: 1.75rem;
+	border-radius: 1rem;
+	box-shadow: 0 0.75rem 2rem color-mix(in srgb, var(--bubb-color-dark) 8%, transparent);
+}
+
+.woocommerce-cart .cart_totals h2 {
+	margin: 0 0 1.25rem;
+	padding: 0 0 1rem;
+	font-size: 1.375rem;
+}
+
+.woocommerce-cart .cart_totals table.shop_table {
+	margin: 0 0 1.5rem;
+	border: 0;
+	background: transparent;
+}
+
+.woocommerce-cart .cart_totals table.shop_table th,
+.woocommerce-cart .cart_totals table.shop_table td {
+	padding: 0.875rem 0;
+	background: transparent;
+	border-right: 0;
+	border-bottom: 0.0625rem solid #e3e7ed;
+	color: var(--bubb-color-text);
+	text-transform: none;
+	letter-spacing: normal;
+}
+
+.woocommerce-cart .cart_totals table.shop_table td {
+	font-size: 1rem;
+}
+
+.woocommerce-cart .cart_totals table.shop_table .order-total th,
+.woocommerce-cart .cart_totals table.shop_table .order-total td {
+	padding-top: 1.125rem;
+	border-bottom: 0;
+	box-shadow: none;
+}
+
+.woocommerce-cart .cart_totals .checkout-button {
+	min-height: 3.5rem;
+	margin-top: 0;
+	border-radius: 999px;
+}
+
 /* Coupon error ("…cannot be applied because it does not exist") — WC's
    cart.js appends this as a plain `<p class="coupon-error-notice">` sibling
    inside `.coupon` (a flex row with the input + button), where it previously
@@ -1061,11 +1261,83 @@
   13. CHECKOUT
    ============================================================================= */
 
-.woocommerce-checkout .woocommerce > form {
+.woocommerce-checkout .woocommerce > form.checkout {
 	display: grid;
-	grid-template-columns: 1fr 22rem;
-	gap: 3rem;
+	grid-template-columns: minmax(0, 1fr) 25rem;
+	gap: 2.5rem;
 	align-items: start;
+}
+
+.woocommerce-checkout .entry-header {
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.woocommerce-checkout .entry-content {
+	margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.woocommerce-checkout .woocommerce-notices-wrapper:empty,
+.woocommerce-checkout .woocommerce-notices-wrapper:not(:has(.woocommerce-message, .woocommerce-error, .woocommerce-info)) {
+	display: none;
+}
+
+.woocommerce-checkout .woocommerce-notices-wrapper {
+	margin-bottom: 1.25rem;
+}
+
+.woocommerce-checkout .woocommerce-form-coupon-toggle {
+	margin-bottom: 1rem;
+}
+
+.woocommerce-checkout .woocommerce-form-coupon-toggle .woocommerce-info {
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	color: var(--bubb-color-text);
+	font-size: 0.9375rem;
+}
+
+.woocommerce-checkout .woocommerce-form-coupon-toggle .showcoupon {
+	font-weight: 600;
+	text-underline-offset: 0.2em;
+}
+
+.woocommerce-checkout form.checkout_coupon {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 0 0 2rem;
+	padding: 1rem;
+	background: var(--bubb-color-light);
+	border: 0.0625rem solid #d7dce4;
+	border-radius: 1rem;
+}
+
+.woocommerce-checkout form.checkout_coupon .form-row {
+	float: none;
+	width: auto;
+	margin: 0;
+	padding: 0;
+}
+
+.woocommerce-checkout form.checkout_coupon .form-row-first {
+	flex: 1;
+}
+
+.woocommerce-checkout form.checkout_coupon .form-row-last {
+	flex: 0 0 auto;
+}
+
+.woocommerce-checkout form.checkout_coupon input {
+	min-height: 3.25rem;
+}
+
+.woocommerce-checkout form.checkout_coupon button {
+	min-width: 11rem;
+	min-height: 3.25rem;
 }
 
 .woocommerce-checkout #customer_details {
@@ -1088,7 +1360,7 @@
 .woocommerce-checkout .checkout-sidebar {
 	grid-column: 2;
 	position: sticky;
-	top: 2rem;
+	top: 7rem;
 }
 
 .woocommerce-checkout h3 {
@@ -1102,7 +1374,7 @@
 .woocommerce-billing-fields .form-row,
 .woocommerce-shipping-fields .form-row,
 .woocommerce-account-fields .form-row {
-	margin-bottom: 1.25rem;
+	margin-bottom: 0;
 }
 
 /* Two columns for first/last name */
@@ -1110,7 +1382,13 @@
 .woocommerce-shipping-fields__field-wrapper {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 1.25rem;
+	gap: 1rem 1.25rem;
+}
+
+.woocommerce-billing-fields__field-wrapper .form-row,
+.woocommerce-shipping-fields__field-wrapper .form-row {
+	flex: 1 1 100%;
+	width: 100%;
 }
 
 .woocommerce-billing-fields__field-wrapper .form-row-first,
@@ -1137,8 +1415,8 @@
 	align-items: center;
 	height: 3.125rem;
 	padding: 0 1rem;
-	background-color: var(--bubb-color-background);
-	border: 0.0625rem solid var(--bubb-color-subtle);
+	background-color: var(--bubb-color-light);
+	border: 0.0625rem solid #cfd5dd;
 	border-radius: var(--bubb-border-radius-sm);
 	transition: border-color var(--bubb-transition);
 }
@@ -1183,14 +1461,16 @@
 /* Dropdown panel — same card chrome (border/radius/shadow) as the rest of
    the design system instead of Select2's flat, hard-edged default popup. */
 .select2-dropdown {
-	border-color: var(--bubb-color-subtle);
+	background-color: var(--bubb-color-light);
+	border-color: #cfd5dd;
 	border-radius: var(--bubb-border-radius-sm);
 	box-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--bubb-color-dark) 12%, transparent);
 	overflow: hidden;
 }
 
 .select2-container--default .select2-search--dropdown .select2-search__field {
-	border: 0.0625rem solid var(--bubb-color-subtle);
+	background-color: var(--bubb-color-light);
+	border: 0.0625rem solid #cfd5dd;
 	border-radius: var(--bubb-border-radius-sm);
 	padding: 0.5rem 0.75rem;
 	color: var(--bubb-color-text);
@@ -1222,11 +1502,11 @@
    whole sidebar (table, payment notice, terms text, button) reads as one
    deliberate card instead of a flat tinted rectangle. */
 #order_review {
-	background-color: var(--bubb-color-subtle);
-	border: 0.0625rem solid rgba(0, 0, 0, 0.06);
-	border-radius: var(--bubb-border-radius);
+	background-color: var(--bubb-color-light);
+	border: 0.0625rem solid #d7dce4;
+	border-radius: 1rem;
 	padding: 1.5rem;
-	box-shadow: 0 1px 3px color-mix(in srgb, var(--bubb-color-dark) 5%, transparent);
+	box-shadow: 0 0.75rem 2rem color-mix(in srgb, var(--bubb-color-dark) 8%, transparent);
 }
 
 #order_review h3 {
@@ -1237,6 +1517,8 @@
 #order_review table.shop_table {
 	margin-bottom: 1rem;
 	font-size: 0.9375rem;
+	background: transparent;
+	border: 0;
 }
 
 /* Receipt-style cells — edge-to-edge like the redesigned `.cart_totals`
@@ -1245,7 +1527,8 @@
 #order_review table.shop_table th,
 #order_review table.shop_table td {
 	padding: 0.75rem 0;
-	border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.06);
+	background: transparent;
+	border-bottom: 0.0625rem solid #e3e7ed;
 }
 
 /* The amount column is always the row's last cell — `.product-total` in the
@@ -1256,6 +1539,36 @@
 #order_review table.shop_table tr > *:last-child {
 	text-align: right;
 	font-weight: 600;
+}
+
+#order_review table.shop_table td.product-name {
+	padding-right: 1rem;
+	vertical-align: top;
+	line-height: 1.4;
+}
+
+#order_review table.shop_table .product-name dl.variation {
+	display: grid;
+	grid-template-columns: max-content minmax(0, 1fr);
+	gap: 0.2rem 0.5rem;
+	margin: 0.625rem 0 0;
+	color: var(--bubb-color-mid);
+	font-size: 0.8125rem;
+}
+
+#order_review table.shop_table .product-name dl.variation dt,
+#order_review table.shop_table .product-name dl.variation dd {
+	float: none;
+	margin: 0;
+	padding: 0;
+}
+
+#order_review table.shop_table .product-name dl.variation dt {
+	font-weight: 600;
+}
+
+#order_review table.shop_table .product-name dl.variation dd p {
+	margin: 0;
 }
 
 /* Order total: same thin-hairline + brand-amount treatment as `.cart_totals`
@@ -1286,9 +1599,9 @@
 
 /* Payment methods */
 .woocommerce #payment {
-	background-color: var(--bubb-color-light);
-	border: 0.0625rem solid var(--bubb-color-subtle);
-	border-radius: var(--bubb-border-radius-sm);
+	background-color: #f8fbff;
+	border: 0.0625rem solid #d7dce4;
+	border-radius: 0.875rem;
 	margin-top: 1.25rem;
 	overflow: hidden;
 }
@@ -1319,6 +1632,18 @@
 
 .woocommerce #payment .place-order {
 	padding: 1.25rem;
+	background: var(--bubb-color-light);
+	border-top: 0.0625rem solid #e3e7ed;
+}
+
+.woocommerce #payment .place-order p {
+	margin-bottom: 1rem;
+	font-size: 0.9375rem;
+	line-height: 1.6;
+}
+
+.woocommerce #payment .place-order p:last-of-type {
+	margin-bottom: 1.25rem;
 }
 
 .woocommerce #place_order {
@@ -1617,6 +1942,22 @@
   15. RESPONSIVE
    ============================================================================= */
 
+@media only screen and (max-width: 1279px) {
+	.woocommerce-cart .woocommerce:has(.woocommerce-cart-form) {
+		grid-template-columns: minmax(0, 1fr);
+		column-gap: 0;
+	}
+
+	.woocommerce-cart .cart-collaterals {
+		position: static;
+		margin-top: 0;
+	}
+
+	.woocommerce-cart .cart-collaterals .cart_totals {
+		width: 100%;
+	}
+}
+
 @media only screen and (max-width: 991px) {
 	.woocommerce.single-product div[id^="product-"] {
 		grid-template-columns: 1fr;
@@ -1632,8 +1973,7 @@
 	   column) exceeds the container at this breakpoint; an `auto` minimum
 	   would let the track grow to fit that content and overflow, dragging
 	   the cart-totals/order-review box along with it off-screen. */
-	.woocommerce-cart .woocommerce:has(.woocommerce-cart-form),
-	.woocommerce-checkout .woocommerce > form {
+	.woocommerce-checkout .woocommerce > form.checkout {
 		grid-template-columns: minmax(0, 1fr);
 	}
 
@@ -1652,7 +1992,7 @@
 	}
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 991px) {
 	.wc-main {
 		padding-top: 2.5rem;
 		padding-bottom: 3rem;
@@ -1669,16 +2009,28 @@
 		flex-direction: column;
 	}
 
+	.woocommerce-checkout form.checkout_coupon {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.woocommerce-checkout form.checkout_coupon .form-row-first,
+	.woocommerce-checkout form.checkout_coupon .form-row-last,
+	.woocommerce-checkout form.checkout_coupon button {
+		width: 100%;
+		min-width: 0;
+	}
+
+	.woocommerce-checkout .checkout-sidebar {
+		margin-top: 0.5rem;
+	}
+
 	.woocommerce-billing-fields__field-wrapper .form-row-first,
 	.woocommerce-billing-fields__field-wrapper .form-row-last,
 	.woocommerce-shipping-fields__field-wrapper .form-row-first,
 	.woocommerce-shipping-fields__field-wrapper .form-row-last {
 		flex: none;
 		width: 100%;
-	}
-
-	.woocommerce table.cart .product-thumbnail {
-		display: none;
 	}
 
 	/* Cart table → stacked cards. Four columns plus the quantity stepper
@@ -1708,8 +2060,14 @@
 
 	.woocommerce-cart table.cart tr {
 		position: relative;
-		padding: 1.25rem 2.75rem 1.25rem 0;
-		border-bottom: 0.0625rem solid var(--bubb-color-subtle);
+		display: grid;
+		grid-template-columns: 5rem minmax(0, 1fr);
+		column-gap: 1rem;
+		margin-bottom: 1rem;
+		padding: 1.25rem;
+		background: var(--bubb-color-light);
+		border: 0.0625rem solid #d7dce4;
+		border-radius: 1rem;
 	}
 
 	/* The closing "actions" row (coupon form + Update cart) has no remove
@@ -1719,11 +2077,13 @@
 	   inside it) narrower than every other row, leaving a dead gap on the
 	   right edge. Drop it so this row spans the same full card width. */
 	.woocommerce-cart table.cart tr:has(td.actions) {
-		padding-right: 0;
+		display: block;
+		margin-bottom: 0;
+		padding: 1.25rem;
 	}
 
 	.woocommerce-cart table.cart tr:first-child {
-		border-top: 0.0625rem solid var(--bubb-color-subtle);
+		border-top: 0.0625rem solid #d7dce4;
 	}
 
 	.woocommerce-cart table.cart td {
@@ -1732,8 +2092,31 @@
 		justify-content: space-between;
 		gap: 1rem;
 		padding: 0.375rem 0;
+		background: transparent;
+		border-top: 0;
+		border-right: 0;
 		border-bottom: none;
+		border-left: 0;
+		border-radius: 0;
 		text-align: right;
+	}
+
+	.woocommerce-cart table.cart tbody tr:not(:last-child) td {
+		padding-top: 0.75rem;
+		padding-bottom: 0.75rem;
+		background: transparent;
+		border-top: 0;
+		border-right: 0;
+		border-bottom: 0;
+		border-left: 0;
+		border-radius: 0;
+	}
+
+	.woocommerce-cart table.cart tbody tr:not(:last-child) td:first-child,
+	.woocommerce-cart table.cart tbody tr:not(:last-child) td:last-child {
+		border-right: 0;
+		border-left: 0;
+		border-radius: 0;
 	}
 
 	.woocommerce-cart table.cart td::before {
@@ -1747,22 +2130,75 @@
 	   than its own labeled row — it's an icon-only action, not data. */
 	.woocommerce-cart table.cart td.product-remove {
 		position: absolute;
-		top: 1.25rem;
-		right: 0;
+		top: 1rem;
+		right: 1rem;
 		display: block;
+		width: auto;
 		padding: 0;
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+	}
+
+	.woocommerce-cart table.cart td.product-remove a {
+		width: 2rem;
+		height: 2rem;
+		border: 0;
+		border-radius: 50%;
 	}
 
 	.woocommerce-cart table.cart td.product-remove::before {
 		content: none;
 	}
 
+	.woocommerce-cart table.cart td.product-thumbnail {
+		display: block;
+		grid-column: 1;
+		grid-row: 1;
+		width: auto;
+		padding: 0;
+	}
+
+	.woocommerce-cart table.cart td.product-thumbnail::before {
+		content: none;
+	}
+
+	.woocommerce-cart table.cart .product-thumbnail img {
+		width: 5rem;
+		height: 5rem;
+	}
+
 	.woocommerce-cart table.cart td.product-name {
-		align-items: flex-start;
+		display: block;
+		grid-column: 2;
+		grid-row: 1;
+		padding: 0 2.5rem 1rem 0;
+		text-align: left;
 	}
 
 	.woocommerce-cart table.cart td.product-name::before {
-		padding-top: 0.125rem;
+		content: none;
+	}
+
+	.woocommerce-cart table.cart td.product-name > a {
+		margin-bottom: 0.625rem;
+	}
+
+	.woocommerce-cart table.cart .product-name dl.variation {
+		gap: 0.2rem 0.5rem;
+		font-size: 0.8125rem;
+	}
+
+	.woocommerce-cart table.cart td.product-price,
+	.woocommerce-cart table.cart td.product-quantity,
+	.woocommerce-cart table.cart td.product-subtotal {
+		grid-column: 1 / -1;
+		padding: 0.875rem 0;
+		border-top: 0.0625rem solid #e3e7ed;
+	}
+
+	.woocommerce-cart table.cart td.product-price {
+		margin-top: 0.25rem;
 	}
 
 	/* `td.actions` houses the coupon form and (for no-JS visitors, see
@@ -1773,10 +2209,15 @@
 	   and stretch them across the full width — each then reads as its own
 	   full-width control. */
 	.woocommerce-cart table.cart td.actions {
+		display: flex;
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: flex-start;
 		gap: 1rem;
+		padding: 0;
+		background: transparent;
+		border: 0;
+		border-radius: 0;
 	}
 
 	/* The "actions" cell's `text-align: right` (set above for the stacked
@@ -1790,5 +2231,54 @@
 		flex-direction: column;
 		align-items: stretch;
 		text-align: left;
+	}
+
+	.woocommerce-cart table.cart td.actions .coupon button {
+		width: 100%;
+		min-width: 0;
+	}
+
+	.woocommerce-cart .cart-collaterals .cart_totals {
+		padding: 1.5rem;
+	}
+}
+
+@media only screen and (max-width: 479px) {
+	.woocommerce-cart .entry-title {
+		font-size: clamp(2.5rem, 14vw, 3.5rem);
+	}
+
+	.woocommerce-cart table.cart tr {
+		grid-template-columns: 4.25rem minmax(0, 1fr);
+		column-gap: 0.875rem;
+		padding: 1rem;
+	}
+
+	.woocommerce-cart table.cart .product-thumbnail img {
+		width: 4.25rem;
+		height: 4.25rem;
+	}
+
+	.woocommerce-cart table.cart td.product-name {
+		padding-right: 2rem;
+	}
+
+	.woocommerce-cart table.cart .product-name dl.variation {
+		grid-template-columns: 1fr;
+		gap: 0.125rem;
+	}
+
+	.woocommerce-cart table.cart .product-name dl.variation dd {
+		margin-bottom: 0.375rem;
+	}
+
+	.woocommerce-cart table.cart td.product-price,
+	.woocommerce-cart table.cart td.product-quantity,
+	.woocommerce-cart table.cart td.product-subtotal {
+		font-size: 0.9375rem;
+	}
+
+	.woocommerce-cart .cart-collaterals .cart_totals {
+		padding: 1.25rem;
 	}
 }

@@ -127,6 +127,7 @@ function bubble_stop_scripts() {
     wp_enqueue_script('slick-carousel', get_template_directory_uri() . '/assets/js/slick.js', array('jquery'), BUBBLE_STOP_VERSION, true);
     wp_enqueue_script('bubble-stop-video-behaviors', get_template_directory_uri() . '/assets/js/video-behaviors.js', array('jquery'), BUBBLE_STOP_VERSION, true);
     wp_enqueue_script('bubble-stop-video-popup', get_template_directory_uri() . '/assets/js/video-popup.js', array('jquery'), BUBBLE_STOP_VERSION, true);
+	wp_enqueue_script('bubble-stop-testimonials', get_template_directory_uri() . '/assets/js/bubble-stop-testimonials.js', array('jquery', 'slick-carousel'), BUBBLE_STOP_VERSION, true);
     wp_enqueue_script('bubble-stop-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery', 'slick-carousel'), BUBBLE_STOP_VERSION, true);
 }
 add_action('wp_enqueue_scripts', 'bubble_stop_scripts');

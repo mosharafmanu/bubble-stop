@@ -98,7 +98,7 @@
 
 		// Close when resizing back to desktop
 		$( window ).on( 'resize', function () {
-			if ( isMenuOpen() && $( window ).width() > 1199 ) {
+			if ( isMenuOpen() && $( window ).width() > 767 ) {
 				closeMenu();
 			}
 		} );

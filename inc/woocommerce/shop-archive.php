@@ -1,225 +1,252 @@
 <?php
 /**
- * Bubble Stop — Shop Archive Layout & Filters
- *
- * Standalone, optional piece of the WooCommerce module: replaces the shop/
- * category archive's default top-to-bottom layout with a sidebar-filter +
- * toolbar + grid layout (hero, category filter sidebar, result-count/ordering
- * toolbar, custom pagination, optional flexible-content below the grid).
- *
- * Pure hooks + plain links — no AJAX. Filter clicks (bubble-stop-shop-
- * archive.js) rewrite the URL with a `filter_category` query argument; the
- * resulting request is turned into a tax_query below. Everything is scoped
- * to `is_shop() || is_product_taxonomy()`, so it only touches archive pages
- * and leaves single-product, cart, checkout, and account pages untouched.
- *
- * Removable independently of the rest of the WooCommerce module: delete this
- * file plus its require below, inc/woocommerce/templates/shop-*.php, and the
- * bubble-stop-shop-archive CSS/JS pair — the shop falls back to WooCommerce's
- * stock archive-product.php layout (still themed by bubble-stop-woocommerce.css).
+ * Bubble Stop shop and product-category archive renderer.
  *
  * @package bubble-stop
  */
 
 defined( 'ABSPATH' ) || exit;
 
-/**
- * Turn a `?filter_category=slug,slug` URL parameter into a tax_query on the
- * main shop/archive product query.
- */
-function bubble_stop_filter_shop_products_by_category( $query ) {
-	if ( is_admin() || ! $query->is_main_query() || ! ( is_shop() || is_product_taxonomy() ) ) {
-		return;
-	}
-
-	if ( empty( $_GET['filter_category'] ) ) {
-		return;
-	}
-
-	$category_slugs = array_filter( array_map( 'sanitize_title', explode( ',', wp_unslash( $_GET['filter_category'] ) ) ) );
-
-	if ( empty( $category_slugs ) ) {
-		return;
-	}
-
-	$tax_query   = $query->get( 'tax_query' ) ?: [];
-	$tax_query[] = [
-		'taxonomy' => 'product_cat',
-		'field'    => 'slug',
-		'terms'    => $category_slugs,
-		'operator' => 'IN',
-	];
-
-	$query->set( 'tax_query', $tax_query );
-}
-add_action( 'pre_get_posts', 'bubble_stop_filter_shop_products_by_category', 20 );
-
-/**
- * Suppress the archive template's own `<h1>` (and the default header/
- * description/breadcrumb hooks) on shop/category pages — the shop hero
- * (bubble_stop_display_shop_hero) reproduces all of it, so without this they'd
- * print twice.
- */
-function bubble_stop_hide_default_archive_page_title( $show ) {
-	if ( is_shop() || is_product_taxonomy() ) {
-		return false;
-	}
-	return $show;
-}
-add_filter( 'woocommerce_show_page_title', 'bubble_stop_hide_default_archive_page_title' );
-
-function bubble_stop_remove_archive_default_header_elements() {
-	if ( ! ( is_shop() || is_product_taxonomy() ) ) {
-		return;
-	}
-
-	remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
-	remove_action( 'woocommerce_shop_loop_header', 'woocommerce_product_taxonomy_archive_header', 10 );
-	remove_all_actions( 'woocommerce_archive_description' );
-}
-add_action( 'template_redirect', 'bubble_stop_remove_archive_default_header_elements' );
-
-/**
- * Hero — title, description, optional image. Sits above the filter/grid layout.
- */
-function bubble_stop_display_shop_hero() {
-	if ( is_shop() || is_product_taxonomy() ) {
-		get_template_part( 'inc/woocommerce/templates/shop-hero' );
-	}
-}
-add_action( 'woocommerce_before_main_content', 'bubble_stop_display_shop_hero', 12 );
-
-/**
- * Open the page wrapper + two-column grid (header / sidebar / content areas —
- * see bubble-stop-shop-archive.css for the `.shop-grid` layout).
- */
-function bubble_stop_shop_archive_wrapper_start() {
-	if ( ! ( is_shop() || is_product_taxonomy() ) ) {
-		return;
-	}
-	echo '<div class="shop-page-wrapper layout-padding"><div class="shop-grid">';
-}
-add_action( 'woocommerce_before_main_content', 'bubble_stop_shop_archive_wrapper_start', 13 );
-
-/**
- * Toolbar — filter toggle, result count, ordering dropdown.
- */
-function bubble_stop_display_shop_toolbar() {
-	if ( ! ( is_shop() || is_product_taxonomy() ) ) {
-		return;
-	}
-	get_template_part( 'inc/woocommerce/templates/shop-toolbar' );
-}
-add_action( 'woocommerce_before_main_content', 'bubble_stop_display_shop_toolbar', 14 );
-
-/**
- * Sidebar — category filter tree.
- */
-function bubble_stop_display_shop_sidebar() {
-	if ( ! ( is_shop() || is_product_taxonomy() ) ) {
-		return;
-	}
-	echo '<aside class="shop-sidebar">';
-	get_template_part( 'inc/woocommerce/templates/shop-filters' );
-	echo '</aside>';
-}
-add_action( 'woocommerce_before_main_content', 'bubble_stop_display_shop_sidebar', 15 );
-
-/**
- * Open the content column. Both this and the sidebar hook above run on
- * `woocommerce_before_main_content` priority 15 — order between same-priority
- * callbacks follows registration order, so the sidebar prints first and this
- * starts the adjacent grid cell, exactly matching `.shop-grid`'s two columns.
- */
-function bubble_stop_shop_content_start() {
-	if ( ! ( is_shop() || is_product_taxonomy() ) ) {
-		return;
-	}
-	echo '<div class="shop-content">';
-}
-add_action( 'woocommerce_before_main_content', 'bubble_stop_shop_content_start', 15 );
-
-/**
- * Custom pagination — replaces WooCommerce's default (removed below) with the
- * theme's shared `bubble_stop_render_pagination()` so the shop matches blog/
- * archive pagination styling.
- */
-function bubble_stop_display_shop_pagination() {
-	if ( ! ( is_shop() || is_product_taxonomy() ) ) {
-		return;
-	}
-	if ( function_exists( 'bubble_stop_render_pagination' ) ) {
-		bubble_stop_render_pagination();
-	}
-}
-add_action( 'woocommerce_after_shop_loop', 'bubble_stop_display_shop_pagination', 20 );
-
-/**
- * Close the content column.
- */
-function bubble_stop_shop_content_end() {
-	if ( ! ( is_shop() || is_product_taxonomy() ) ) {
-		return;
-	}
-	echo '</div><!-- .shop-content -->';
-}
-add_action( 'woocommerce_after_main_content', 'bubble_stop_shop_content_end', 5 );
-
-/**
- * Close the grid + page wrapper.
- */
-function bubble_stop_shop_archive_wrapper_end() {
-	if ( ! ( is_shop() || is_product_taxonomy() ) ) {
-		return;
-	}
-	echo '</div><!-- .shop-grid --></div><!-- .shop-page-wrapper -->';
-}
-add_action( 'woocommerce_after_main_content', 'bubble_stop_shop_archive_wrapper_end', 10 );
-
-/**
- * Optional ACF flexible-content sections below the grid — same `cms` field as
- * pages, sourced from the queried category term when it has its own content,
- * falling back to the Shop page. Lets a project add CMS blocks (FAQs, banners,
- * brand strips, etc.) under the product grid without a bespoke template.
- */
-function bubble_stop_load_shop_flexible_content() {
-	if ( ! ( is_shop() || is_product_taxonomy() ) ) {
-		return;
-	}
-
-	if ( ! function_exists( 'bubble_stop_flexible_content' ) ) {
-		return;
-	}
-
-	$content_source = null;
-
-	if ( is_product_taxonomy() ) {
-		$queried_object = get_queried_object();
-
-		if ( $queried_object && isset( $queried_object->taxonomy, $queried_object->term_id )
-			&& function_exists( 'have_rows' )
-			&& have_rows( 'cms', $queried_object->taxonomy . '_' . $queried_object->term_id )
-		) {
-			$content_source = $queried_object->taxonomy . '_' . $queried_object->term_id;
-		}
-	}
-
-	if ( ! $content_source ) {
+if ( ! function_exists( 'bubble_stop_get_shop_field' ) ) {
+	function bubble_stop_get_shop_field( $field_name, $default = false ) {
 		$shop_page_id = wc_get_page_id( 'shop' );
-		if ( $shop_page_id ) {
-			$content_source = $shop_page_id;
-		}
-	}
 
-	if ( $content_source ) {
-		bubble_stop_flexible_content( 'cms', $content_source );
+		if ( $shop_page_id > 0 && function_exists( 'get_field' ) ) {
+			$value = get_field( $field_name, $shop_page_id );
+			if ( false !== $value && null !== $value && '' !== $value ) {
+				return $value;
+			}
+		}
+
+		return $default;
 	}
 }
-add_action( 'woocommerce_after_main_content', 'bubble_stop_load_shop_flexible_content', 10 );
 
-// Reposition result count + ordering into the custom toolbar (shop-toolbar.php).
-remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
-remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+if ( ! function_exists( 'bubble_stop_get_shop_categories' ) ) {
+	function bubble_stop_get_shop_categories() {
+		if ( is_product_category() ) {
+			$term = get_queried_object();
+			return $term instanceof WP_Term ? [ $term ] : [];
+		}
 
-// Replace default pagination with bubble_stop_render_pagination() above.
-remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 10 );
+		$categories = get_terms(
+			[
+				'taxonomy'   => 'product_cat',
+				'hide_empty' => true,
+				'parent'     => 0,
+				'orderby'    => 'menu_order',
+				'order'      => 'ASC',
+			]
+		);
+
+		return is_wp_error( $categories ) ? [] : $categories;
+	}
+}
+
+if ( ! function_exists( 'bubble_stop_get_shop_category_products' ) ) {
+	function bubble_stop_get_shop_category_products( $category, $limit = 12 ) {
+		if ( ! $category instanceof WP_Term ) {
+			return [];
+		}
+
+		return wc_get_products(
+			[
+				'status'   => 'publish',
+				'limit'    => max( 1, min( 30, absint( $limit ) ) ),
+				'category' => [ $category->slug ],
+				'orderby'  => 'menu_order',
+				'order'    => 'ASC',
+			]
+		);
+	}
+}
+
+if ( ! function_exists( 'bubble_stop_get_shop_category_prices' ) ) {
+	function bubble_stop_get_shop_category_prices( $category, $products ) {
+		$prices = [
+			'regular' => '',
+			'large'   => '',
+		];
+
+		if ( function_exists( 'get_field' ) ) {
+			$prices['regular'] = get_field( 'regular_price', $category ) ?: '';
+			$prices['large']   = get_field( 'large_price', $category ) ?: '';
+		}
+
+		$regular_prices    = [];
+		$large_prices      = [];
+		$unassigned_prices = [];
+
+		foreach ( $products as $product ) {
+			$price_products = $product->is_type( 'variable' )
+				? array_filter( array_map( 'wc_get_product', $product->get_children() ) )
+				: [ $product ];
+
+			foreach ( $price_products as $price_product ) {
+				$price = $price_product->get_price();
+				if ( '' === $price ) {
+					continue;
+				}
+
+				$size = '';
+				foreach ( $price_product->get_attributes() as $attribute_name => $attribute_value ) {
+					if ( false !== strpos( strtolower( $attribute_name ), 'size' ) ) {
+						$size = strtolower( (string) $attribute_value );
+						break;
+					}
+				}
+
+				if ( false !== strpos( $size, 'large' ) ) {
+					$large_prices[] = (float) $price;
+				} elseif ( false !== strpos( $size, 'regular' ) || false !== strpos( $size, 'small' ) ) {
+					$regular_prices[] = (float) $price;
+				} else {
+					$unassigned_prices[] = (float) $price;
+				}
+			}
+		}
+
+		$regular_prices    = array_values( array_unique( $regular_prices ) );
+		$large_prices      = array_values( array_unique( $large_prices ) );
+		$unassigned_prices = array_values( array_unique( $unassigned_prices ) );
+		sort( $regular_prices, SORT_NUMERIC );
+		sort( $large_prices, SORT_NUMERIC );
+		sort( $unassigned_prices, SORT_NUMERIC );
+
+		if ( ! $prices['regular'] ) {
+			$prices['regular'] = $regular_prices[0] ?? ( $unassigned_prices[0] ?? '' );
+		}
+		if ( ! $prices['large'] ) {
+			$prices['large'] = $large_prices[0] ?? '';
+			if ( ! $prices['large'] ) {
+				foreach ( $unassigned_prices as $unassigned_price ) {
+					if ( (float) $unassigned_price !== (float) $prices['regular'] ) {
+						$prices['large'] = $unassigned_price;
+						break;
+					}
+				}
+			}
+		}
+
+		return $prices;
+	}
+}
+
+if ( ! function_exists( 'bubble_stop_render_shop_product_card' ) ) {
+	function bubble_stop_render_shop_product_card( $product ) {
+		if ( ! $product instanceof WC_Product || ! $product->is_visible() ) {
+			return;
+		}
+
+		$product_id = $product->get_id();
+		$permalink  = get_permalink( $product_id );
+		$image_id   = $product->get_image_id();
+		$show_price = ! $product->is_type( 'variable' ) && '' !== $product->get_price();
+		?>
+		<article class="shop-menu-card">
+			<a href="<?php echo esc_url( $permalink ); ?>" class="shop-menu-card__image" tabindex="-1" aria-hidden="true">
+				<?php
+				if ( $image_id && function_exists( 'bubble_stop_render_responsive_picture' ) ) {
+					bubble_stop_render_responsive_picture(
+						[
+							'ID'  => $image_id,
+							'url' => wp_get_attachment_url( $image_id ),
+							'alt' => get_post_meta( $image_id, '_wp_attachment_image_alt', true ) ?: $product->get_name(),
+						],
+						[
+							'class' => 'shop-menu-card__image-file',
+							'sizes' => '(max-width: 575px) 80vw, (max-width: 991px) 42vw, 20vw',
+						]
+					);
+				} else {
+					echo wp_kses_post( wc_placeholder_img( 'woocommerce_thumbnail' ) );
+				}
+				?>
+			</a>
+
+			<div class="shop-menu-card__body">
+				<h3 class="shop-menu-card__title"><a href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $product->get_name() ); ?></a></h3>
+				<?php if ( $show_price ) : ?>
+					<div class="shop-menu-card__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></div>
+				<?php endif; ?>
+				<a
+					href="<?php echo esc_url( $permalink ); ?>"
+					class="shop-menu-card__cart"
+					aria-label="<?php echo esc_attr( sprintf( __( 'View %s', 'bubble-stop' ), $product->get_name() ) ); ?>"
+				>
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L20 7H6M9.5 20a.8.8 0 1 0 0-1.6.8.8 0 0 0 0 1.6Zm7 0a.8.8 0 1 0 0-1.6.8.8 0 0 0 0 1.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</a>
+			</div>
+		</article>
+		<?php
+	}
+}
+
+if ( ! function_exists( 'bubble_stop_render_shop_category_block' ) ) {
+	function bubble_stop_render_shop_category_block( $category, $limit ) {
+		$products = bubble_stop_get_shop_category_products( $category, $limit );
+		if ( ! $products ) {
+			return;
+		}
+
+		$prices   = bubble_stop_get_shop_category_prices( $category, $products );
+		$subtitle = function_exists( 'get_field' ) ? get_field( 'menu_subtitle', $category ) : '';
+		$block_id = wp_unique_id( 'shop-category-' );
+		?>
+		<section id="<?php echo esc_attr( $block_id ); ?>" class="shop-category-block">
+			<header class="shop-category-block__header">
+				<div class="shop-category-block__details">
+					<div class="shop-category-block__name-wrap">
+						<h2 class="shop-category-block__title"><?php echo esc_html( $category->name ); ?></h2>
+						<?php if ( $subtitle ) : ?><span class="shop-category-block__subtitle"><?php echo esc_html( $subtitle ); ?></span><?php endif; ?>
+					</div>
+					<?php if ( $prices['regular'] ) : ?>
+						<div class="shop-category-block__price"><span><?php esc_html_e( 'Regular', 'bubble-stop' ); ?></span><strong><?php echo wp_kses_post( wc_price( $prices['regular'] ) ); ?></strong></div>
+					<?php endif; ?>
+					<?php if ( $prices['large'] ) : ?>
+						<div class="shop-category-block__price"><span><?php esc_html_e( 'Large', 'bubble-stop' ); ?></span><strong><?php echo wp_kses_post( wc_price( $prices['large'] ) ); ?></strong></div>
+					<?php endif; ?>
+				</div>
+
+				<div class="shop-category-block__controls" aria-label="<?php echo esc_attr( sprintf( __( '%s carousel controls', 'bubble-stop' ), $category->name ) ); ?>">
+					<button type="button" class="bubble-carousel-arrow shop-category-block__arrow shop-category-block__arrow--prev" aria-label="<?php esc_attr_e( 'Previous products', 'bubble-stop' ); ?>">&larr;</button>
+					<button type="button" class="bubble-carousel-arrow shop-category-block__arrow shop-category-block__arrow--next" aria-label="<?php esc_attr_e( 'Next products', 'bubble-stop' ); ?>">&rarr;</button>
+				</div>
+			</header>
+
+			<div class="shop-category-block__carousel">
+				<?php foreach ( $products as $product ) : ?>
+					<?php bubble_stop_render_shop_product_card( $product ); ?>
+				<?php endforeach; ?>
+			</div>
+		</section>
+		<?php
+	}
+}
+
+if ( ! function_exists( 'bubble_stop_render_shop_page' ) ) {
+	function bubble_stop_render_shop_page() {
+		$categories = bubble_stop_get_shop_categories();
+		$limit      = absint( bubble_stop_get_shop_field( 'products_per_category', 12 ) );
+		$eyebrow    = bubble_stop_get_shop_field( 'menu_eyebrow', __( 'Our Menu', 'bubble-stop' ) );
+		$heading    = bubble_stop_get_shop_field( 'menu_heading', __( 'Create Your Drink', 'bubble-stop' ) );
+		?>
+		<main class="shop-menu-page">
+			<?php get_template_part( 'inc/woocommerce/templates/shop-hero' ); ?>
+
+			<section class="shop-menu layout-padding">
+				<header class="shop-menu__header">
+					<?php if ( $eyebrow ) : ?><p class="shop-menu__eyebrow"><?php echo esc_html( $eyebrow ); ?></p><?php endif; ?>
+					<?php if ( $heading ) : ?><h2 class="shop-menu__title"><?php echo esc_html( $heading ); ?></h2><?php endif; ?>
+				</header>
+
+				<div class="shop-menu__categories">
+					<?php foreach ( $categories as $category ) : ?>
+						<?php bubble_stop_render_shop_category_block( $category, $limit ?: 12 ); ?>
+					<?php endforeach; ?>
+				</div>
+			</section>
+		</main>
+		<?php
+	}
+}

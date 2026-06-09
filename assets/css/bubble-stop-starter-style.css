@@ -417,7 +417,7 @@
 
 /* Constrain and centre the post body — narrower than the site container
    for comfortable line length */
-.post-inner {
+body.single-post .post-inner {
 	max-width: 50rem; /* 800px */
 	margin-left: auto;
 	margin-right: auto;

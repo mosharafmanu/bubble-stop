@@ -46,12 +46,12 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_header_button",
-            "label": "Header Button",
-            "name": "header_button",
+            "key": "field_header_action_buttons",
+            "label": "Header Action Buttons",
+            "name": "header_action_buttons",
             "aria-label": "",
-            "type": "link",
-            "instructions": "Configure the header call-to-action button (e.g., 'Contact us'). Text is shown on desktop, phone icon on mobile.",
+            "type": "repeater",
+            "instructions": "Add the account and cart icon buttons shown on the right side of the header.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -59,27 +59,58 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "array"
-        },
-        {
-            "key": "field_header_button_mobile_phone",
-            "label": "Header Button Mobile Phone",
-            "name": "header_button_mobile_phone",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "Used for the mobile header phone icon link at 1199px and below. Enter a callable phone number.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "+44 (0)1923 839333",
-            "prepend": "",
-            "append": ""
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 2,
+            "collapsed": "field_header_action_link",
+            "button_label": "Add Header Action",
+            "rows_per_page": 2,
+            "sub_fields": [
+                {
+                    "key": "field_header_action_icon",
+                    "label": "Icon",
+                    "name": "header_action_icon",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Upload the prepared SVG or image icon.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "35",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "svg,png,jpg,jpeg,webp",
+                    "preview_size": "thumbnail",
+                    "parent_repeater": "field_header_action_buttons"
+                },
+                {
+                    "key": "field_header_action_link",
+                    "label": "Link",
+                    "name": "header_action_link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "The link text is used as the accessible label, for example Account or Cart.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "65",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "parent_repeater": "field_header_action_buttons"
+                }
+            ]
         },
         {
             "key": "field_footer_settings_tab",
@@ -144,6 +175,51 @@
             "mime_types": "jpg,jpeg,png,svg",
             "allow_in_bindings": 1,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_footer_hours",
+            "label": "Opening Hours",
+            "name": "footer_hours",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add each opening-hours line shown in the footer, for example Tue - Sat: 12pm - 8pm.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Hours Line",
+            "rows_per_page": 10,
+            "sub_fields": [
+                {
+                    "key": "field_footer_hours_text",
+                    "label": "Hours",
+                    "name": "footer_hours_text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Tue - Sat: 12pm - 8pm",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_footer_hours"
+                }
+            ]
         },
         {
             "key": "field_social_medias",
@@ -253,5 +329,5 @@
     "description": "Configure global site settings including header logo, footer logo, social media links, and footer content.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1778823171
+    "modified": 1780998598
 }

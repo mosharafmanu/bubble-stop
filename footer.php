@@ -6,40 +6,40 @@
 ?>
 
 <footer id="colophon" class="site-footer">
-
-	<div class="footer-top layout-padding">
-
-		<?php if ( function_exists( 'bubble_stop_render_footer_logo' ) ) : ?>
+	<div class="footer-card layout-padding">
+		<div class="footer-brand-column">
 			<?php bubble_stop_render_footer_logo(); ?>
-		<?php endif; ?>
+			<?php bubble_stop_render_footer_tagline(); ?>
+		</div>
 
-		<?php if ( function_exists( 'bubble_stop_render_footer_menu' ) ) : ?>
-			<?php bubble_stop_render_footer_menu( [ 'location' => 'footerMenu', 'show_title' => false ] ); ?>
-		<?php endif; ?>
+		<?php
+bubble_stop_render_footer_menu(
+    [
+        'location'   => 'footerMenu',
+        'show_title' => true,
+    ]
+);
+?>
 
+		<div class="footer-hours-column">
+			<h2 class="footer-column-title"><?php esc_html_e('Hours', 'bubble-stop'); ?></h2>
+			<?php bubble_stop_render_footer_hours(); ?>
+		</div>
+
+		<div class="footer-social-column">
+			<h2 class="footer-column-title"><?php esc_html_e('Follow Us', 'bubble-stop'); ?></h2>
+			<?php bubble_stop_render_social_medias(); ?>
+		</div>
 	</div>
 
 	<div class="footer-bottom layout-padding">
-
-		<?php if ( function_exists( 'bubble_stop_render_footer_copyright' ) ) : ?>
-			<?php bubble_stop_render_footer_copyright(); ?>
-		<?php endif; ?>
-
-		<?php if ( function_exists( 'bubble_stop_render_social_medias' ) ) : ?>
-			<?php bubble_stop_render_social_medias(); ?>
-		<?php endif; ?>
-
+		<?php bubble_stop_render_footer_copyright(); ?>
 	</div>
-
 </footer>
 
 </div><!-- #page -->
 
 <?php bubble_stop_render_mobile_navigation(); ?>
-
-<button class="back-to-top" aria-label="<?php esc_attr_e( 'Back to top', 'bubble-stop' ); ?>" aria-hidden="true">
-	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
-</button>
 
 <?php wp_footer(); ?>
 

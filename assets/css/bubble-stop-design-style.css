@@ -533,21 +533,23 @@ h6,.h6-style {
 	border-collapse: collapse;
 	margin: 1.75rem 0;
 	font-size: 0.9375rem;
+	background-color: var(--bubb-color-light);
+	border: 0.0625rem solid #d7dce4;
 }
 .entry-content th,
 .entry-content td {
 	padding: 0.75rem 1rem;
 	text-align: left;
-	border-bottom: 0.0625rem solid var(--bubb-color-subtle);
+	border-bottom: 0.0625rem solid #d7dce4;
 }
 .entry-content th {
 	font-weight: 700;
-	background-color: var(--bubb-color-subtle);
+	background-color: #eef5ff;
 	border-bottom-color: var(--bubb-color-mid);
 	border-bottom-width: 0.125rem;
 }
 .entry-content tbody tr:hover td {
-	background-color: var(--bubb-color-subtle);
+	background-color: #f8fbff;
 }
 
 /* Horizontal rule */

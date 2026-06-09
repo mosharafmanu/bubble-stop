@@ -1,0 +1,135 @@
+{
+    "key": "group_shop_page",
+    "title": "Shop Page Settings",
+    "fields": [
+        {
+            "key": "field_shop_hero_tab",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "required": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_shop_hero_heading",
+            "label": "Hero Heading",
+            "name": "shop_hero_heading",
+            "type": "text",
+            "required": 0,
+            "placeholder": "Our Menu Offers A Wide Variety Of Options"
+        },
+        {
+            "key": "field_shop_hero_highlights",
+            "label": "Hero Highlights",
+            "name": "shop_hero_highlights",
+            "type": "repeater",
+            "required": 0,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Highlight",
+            "rows_per_page": 10,
+            "sub_fields": [
+                {
+                    "key": "field_shop_hero_highlight_text",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "text",
+                    "required": 0,
+                    "placeholder": "Creamy milk teas",
+                    "parent_repeater": "field_shop_hero_highlights"
+                }
+            ]
+        },
+        {
+            "key": "field_shop_hero_description",
+            "label": "Hero Description",
+            "name": "shop_hero_description",
+            "type": "wysiwyg",
+            "required": 0,
+            "instructions": "Falls back to the Shop page content when left empty.",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_shop_hero_button",
+            "label": "Hero Button",
+            "name": "shop_hero_button",
+            "type": "link",
+            "required": 0,
+            "return_format": "array"
+        },
+        {
+            "key": "field_shop_hero_image",
+            "label": "Hero Product Image",
+            "name": "shop_hero_image",
+            "type": "image",
+            "required": 0,
+            "instructions": "Use a transparent PNG or WebP product cutout. Falls back to the Shop page featured image.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "mime_types": "png,webp,jpg,jpeg,svg"
+        },
+        {
+            "key": "field_shop_menu_tab",
+            "label": "Menu",
+            "name": "",
+            "type": "tab",
+            "required": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_shop_menu_eyebrow",
+            "label": "Menu Eyebrow",
+            "name": "menu_eyebrow",
+            "type": "text",
+            "required": 0,
+            "placeholder": "Our Menu"
+        },
+        {
+            "key": "field_shop_menu_heading",
+            "label": "Menu Heading",
+            "name": "menu_heading",
+            "type": "text",
+            "required": 0,
+            "placeholder": "Create Your Drink"
+        },
+        {
+            "key": "field_shop_products_per_category",
+            "label": "Products Per Category",
+            "name": "products_per_category",
+            "type": "number",
+            "required": 0,
+            "default_value": 12,
+            "min": 1,
+            "max": 30,
+            "step": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Used by the page assigned as the WooCommerce Shop page.",
+    "show_in_rest": 0,
+    "modified": 1781008505
+}

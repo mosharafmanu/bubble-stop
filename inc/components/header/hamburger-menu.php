@@ -6,7 +6,6 @@
 
 if ( ! function_exists( 'bubble_stop_render_mobile_navigation' ) ) {
 	function bubble_stop_render_mobile_navigation() {
-		$header_cta    = function_exists( 'bubble_stop_get_header_button' ) ? bubble_stop_get_header_button() : false;
 		$social_medias = function_exists( 'bubble_stop_get_social_medias' ) ? bubble_stop_get_social_medias() : false;
 		?>
 
@@ -37,13 +36,13 @@ if ( ! function_exists( 'bubble_stop_render_mobile_navigation' ) ) {
 					?>
 				</div>
 
-				<?php if ( $header_cta ) : ?>
-				<div class="mobile-nav-cta">
-					<a href="<?php echo esc_url( $header_cta['url'] ?? '#' ); ?>" class="site-btn btn-primary mobile-cta-btn"<?php echo isset( $header_cta['target'] ) && $header_cta['target'] ? ' target="' . esc_attr( $header_cta['target'] ) . '" rel="noopener noreferrer"' : ''; ?>>
-						<?php echo esc_html( $header_cta['title'] ?? 'Get Started' ); ?>
-					</a>
-				</div>
-				<?php endif; ?>
+				<?php
+				bubble_stop_render_header_actions(
+					[
+						'class' => 'header-actions mobile-header-actions',
+					]
+				);
+				?>
 
 				<?php if ( $social_medias && is_array( $social_medias ) && function_exists( 'bubble_stop_render_social_medias' ) ) : ?>
 				<div class="mobile-nav-social">

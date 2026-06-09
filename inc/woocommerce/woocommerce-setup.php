@@ -16,17 +16,20 @@
  * @package bubble-stop
  */
 
-// Shop archive layout + filters — sidebar/toolbar/grid hooks for the shop and
-// category pages. A standalone, optional piece of this module: delete this
-// require plus inc/woocommerce/shop-archive.php, inc/woocommerce/templates/
-// shop-*.php, and the bubble-stop-shop-archive CSS/JS pair to fall back to
-// WooCommerce's stock archive layout (still themed by bubble-stop-woocommerce.css).
-// Loaded here (rather than functions.php) so it shares this file's removability —
-// guarded the same way, by file_exists(), since WooCommerce is already active by
-// the time this file is reached.
+// Shop archive renderer for the hero and category-based menu carousels.
 $bubble_stop_shop_archive = get_template_directory() . '/inc/woocommerce/shop-archive.php';
 if ( file_exists( $bubble_stop_shop_archive ) ) {
 	require $bubble_stop_shop_archive;
+}
+
+$bubble_stop_product_category_showcase = get_template_directory() . '/inc/woocommerce/product-category-showcase.php';
+if ( file_exists( $bubble_stop_product_category_showcase ) ) {
+	require $bubble_stop_product_category_showcase;
+}
+
+$bubble_stop_product_customizations = get_template_directory() . '/inc/woocommerce/product-customizations.php';
+if ( file_exists( $bubble_stop_product_customizations ) ) {
+	require $bubble_stop_product_customizations;
 }
 
 add_action( 'after_setup_theme', function() {
@@ -163,11 +166,7 @@ add_action( 'wp_enqueue_scripts', function() {
 		true
 	);
 
-	// Shop archive layout + filters — only needed on the shop and category
-	// pages that the sidebar/toolbar/grid layout (shop-archive.php) renders.
-	// Kept independent so it's removable on its own, leaving the rest of the
-	// WooCommerce module (and bubble-stop-woocommerce.css's stock archive
-	// styling) intact for projects that don't need a filter sidebar.
+	// Shop menu layout and category carousels.
 	if ( is_shop() || is_product_taxonomy() ) {
 		wp_enqueue_style(
 			'bubble-stop-shop-archive',
@@ -178,7 +177,23 @@ add_action( 'wp_enqueue_scripts', function() {
 		wp_enqueue_script(
 			'bubble-stop-shop-archive',
 			get_template_directory_uri() . '/assets/js/woocommerce/bubble-stop-shop-archive.js',
-			[ 'jquery' ],
+			[ 'jquery', 'slick-carousel' ],
+			BUBBLE_STOP_VERSION,
+			true
+		);
+	}
+
+	if ( is_product() ) {
+		wp_enqueue_style(
+			'bubble-stop-single-product',
+			get_template_directory_uri() . '/assets/css/woocommerce/bubble-stop-single-product.css',
+			[ 'bubble-stop-woocommerce' ],
+			BUBBLE_STOP_VERSION
+		);
+		wp_enqueue_script(
+			'bubble-stop-single-product',
+			get_template_directory_uri() . '/assets/js/woocommerce/bubble-stop-single-product.js',
+			[ 'jquery', 'wc-add-to-cart-variation' ],
 			BUBBLE_STOP_VERSION,
 			true
 		);

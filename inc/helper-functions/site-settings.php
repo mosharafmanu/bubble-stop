@@ -5,39 +5,60 @@
 
 // Header Options
 
-if ( ! function_exists( 'bubble_stop_get_header_button' ) ) {
-	function bubble_stop_get_header_button() {
+if ( ! function_exists( 'bubble_stop_get_header_actions' ) ) {
+	function bubble_stop_get_header_actions() {
 		if ( ! function_exists( 'get_field' ) ) {
 			return false;
 		}
 
-		return get_field( 'header_button', 'options' );
+		return get_field( 'header_action_buttons', 'options' );
 	}
 }
 
-if ( ! function_exists( 'bubble_stop_render_header_button' ) ) {
-	function bubble_stop_render_header_button( $args = [] ) {
-		$button = bubble_stop_get_header_button();
+if ( ! function_exists( 'bubble_stop_render_header_actions' ) ) {
+	function bubble_stop_render_header_actions( $args = [] ) {
+		$actions = bubble_stop_get_header_actions();
 
-		if ( ! $button || ! is_array( $button ) ) {
+		if ( ! $actions || ! is_array( $actions ) || ! function_exists( 'bubble_stop_render_icon' ) ) {
 			return;
 		}
 
 		$defaults = [
-			'class' => 'site-btn btn-primary',
-			'echo'  => true,
+			'class'      => 'header-actions',
+			'link_class' => 'header-action',
+			'icon_class' => 'header-action-icon',
+			'echo'       => true,
 		];
 		$args = wp_parse_args( $args, $defaults );
 
-		$url    = $button['url'] ?? '#';
-		$title  = $button['title'] ?? 'Get Started';
-		$target = $button['target'] ?? '';
-
 		ob_start();
 		?>
-		<a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( $args['class'] ); ?>"<?php echo $target ? ' target="' . esc_attr( $target ) . '" rel="noopener noreferrer"' : ''; ?>>
-			<?php echo esc_html( $title ); ?>
-		</a>
+		<div class="<?php echo esc_attr( $args['class'] ); ?>">
+			<?php foreach ( $actions as $action ) : ?>
+				<?php
+				$icon   = $action['header_action_icon'] ?? false;
+				$link   = $action['header_action_link'] ?? false;
+				$url    = is_array( $link ) ? ( $link['url'] ?? '' ) : '';
+				$title  = is_array( $link ) ? ( $link['title'] ?? '' ) : '';
+				$target = is_array( $link ) ? ( $link['target'] ?? '' ) : '';
+
+				if ( ! $icon || ! $url ) {
+					continue;
+				}
+				?>
+				<a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( $args['link_class'] ); ?>" aria-label="<?php echo esc_attr( $title ?: __( 'Header action', 'bubble-stop' ) ); ?>"<?php echo $target ? ' target="' . esc_attr( $target ) . '" rel="noopener noreferrer"' : ''; ?>>
+					<?php
+					bubble_stop_render_icon(
+						$icon,
+						[
+							'class' => $args['icon_class'],
+							'alt'   => '',
+						]
+					);
+					?>
+				</a>
+			<?php endforeach; ?>
+		</div>
 		<?php
 		$output = ob_get_clean();
 
@@ -214,6 +235,51 @@ if ( ! function_exists( 'bubble_stop_get_footer_copyright' ) ) {
 		}
 
 		return get_field( 'footer_copyright', 'options' );
+	}
+}
+
+if ( ! function_exists( 'bubble_stop_get_footer_hours' ) ) {
+	function bubble_stop_get_footer_hours() {
+		if ( ! function_exists( 'get_field' ) ) {
+			return false;
+		}
+
+		return get_field( 'footer_hours', 'options' );
+	}
+}
+
+if ( ! function_exists( 'bubble_stop_render_footer_hours' ) ) {
+	function bubble_stop_render_footer_hours( $args = [] ) {
+		$hours = bubble_stop_get_footer_hours();
+
+		if ( ! $hours || ! is_array( $hours ) ) {
+			return;
+		}
+
+		$defaults = [
+			'class' => 'footer-hours-list',
+			'echo'  => true,
+		];
+		$args = wp_parse_args( $args, $defaults );
+
+		ob_start();
+		?>
+		<div class="<?php echo esc_attr( $args['class'] ); ?>">
+			<?php foreach ( $hours as $hours_row ) : ?>
+				<?php $hours_text = $hours_row['footer_hours_text'] ?? ''; ?>
+				<?php if ( $hours_text ) : ?>
+					<p><?php echo esc_html( $hours_text ); ?></p>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</div>
+		<?php
+		$output = ob_get_clean();
+
+		if ( $args['echo'] ) {
+			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		} else {
+			return $output;
+		}
 	}
 }
 

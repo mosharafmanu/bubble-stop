@@ -1,120 +1,70 @@
 <?php
 /**
- * Shop hero
- *
- * Title + optional description + optional image, shown above the
- * filter/grid layout on the shop page and product category/tag archives.
- *
- * Image source: the Shop page's featured image on the main shop page,
- * or the term's `hero_image` ACF field (falling back to its taxonomy
- * thumbnail) on category/tag archives — both optional, the hero still
- * renders title-only when no image is set. Deliberately scoped to its
- * own `.shop-hero-*` classes rather than a project's site-wide hero
- * system, so this stays portable as part of the shop-archive module.
+ * Shop page hero.
  *
  * @package bubble-stop
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$hero_image = null;
+$shop_page_id = wc_get_page_id( 'shop' );
+$heading      = bubble_stop_get_shop_field( 'shop_hero_heading', __( 'Our Menu Offers A Wide Variety Of Options', 'bubble-stop' ) );
+$highlights   = bubble_stop_get_shop_field( 'shop_hero_highlights', [] );
+$description  = bubble_stop_get_shop_field( 'shop_hero_description', '' );
+$button       = bubble_stop_get_shop_field( 'shop_hero_button', false );
+$image        = bubble_stop_get_shop_field( 'shop_hero_image', false );
 
-if ( is_shop() ) {
-	$shop_page_id = wc_get_page_id( 'shop' );
-	if ( $shop_page_id && has_post_thumbnail( $shop_page_id ) ) {
-		$image_id   = get_post_thumbnail_id( $shop_page_id );
-		$hero_image = [
-			'ID'  => $image_id,
-			'url' => wp_get_attachment_url( $image_id ),
-			'alt' => get_post_meta( $image_id, '_wp_attachment_image_alt', true ),
-		];
-	}
-} elseif ( is_product_taxonomy() ) {
-	$queried_object = get_queried_object();
-
-	if ( $queried_object && isset( $queried_object->term_id ) ) {
-		if ( function_exists( 'get_field' ) ) {
-			$hero_image_acf = get_field( 'hero_image', $queried_object );
-			if ( $hero_image_acf && is_array( $hero_image_acf ) ) {
-				$hero_image = [
-					'ID'  => $hero_image_acf['ID'],
-					'url' => $hero_image_acf['url'],
-					'alt' => $hero_image_acf['alt'],
-				];
-			}
-		}
-
-		if ( ! $hero_image ) {
-			$thumbnail_id = get_term_meta( $queried_object->term_id, 'thumbnail_id', true );
-			if ( $thumbnail_id ) {
-				$hero_image = [
-					'ID'  => $thumbnail_id,
-					'url' => wp_get_attachment_url( $thumbnail_id ),
-					'alt' => get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true ),
-				];
-			}
-		}
+if ( ! $description && $shop_page_id > 0 ) {
+	$shop_page = get_post( $shop_page_id );
+	if ( $shop_page && $shop_page->post_content ) {
+		$description = apply_filters( 'the_content', $shop_page->post_content );
 	}
 }
 
-$page_title = is_product_taxonomy() ? single_term_title( '', false ) : woocommerce_page_title( false );
-
-$page_description = '';
-if ( is_shop() ) {
-	$shop_page_id = wc_get_page_id( 'shop' );
-	if ( $shop_page_id ) {
-		$shop_page = get_post( $shop_page_id );
-		if ( $shop_page && ! empty( $shop_page->post_content ) ) {
-			$page_description = apply_filters( 'the_content', $shop_page->post_content );
-		}
-	}
-} elseif ( is_product_taxonomy() ) {
-	$page_description = term_description();
-}
-
-$hero_classes = [ 'shop-hero', 'layout-padding' ];
-if ( $hero_image ) {
-	$hero_classes[] = 'has-image';
+if ( ! $image && $shop_page_id > 0 && has_post_thumbnail( $shop_page_id ) ) {
+	$image_id = get_post_thumbnail_id( $shop_page_id );
+	$image    = [
+		'ID'  => $image_id,
+		'url' => wp_get_attachment_url( $image_id ),
+		'alt' => get_post_meta( $image_id, '_wp_attachment_image_alt', true ),
+	];
 }
 ?>
-<?php if ( function_exists( 'bubble_stop_breadcrumb' ) ) : ?>
-	<?php bubble_stop_breadcrumb( true ); ?>
-<?php endif; ?>
+<section class="shop-menu-hero layout-padding">
+	<div class="shop-menu-hero__inner">
+		<div class="shop-menu-hero__content">
+			<?php if ( $heading ) : ?><h1 class="shop-menu-hero__title"><?php echo esc_html( $heading ); ?></h1><?php endif; ?>
 
-<div class="<?php echo esc_attr( implode( ' ', $hero_classes ) ); ?>">
-	<div class="shop-hero-grid">
-
-		<div class="shop-hero-content">
-			<?php if ( ! empty( $page_title ) ) : ?>
-				<h1 class="shop-hero-title"><?php echo esc_html( $page_title ); ?></h1>
+			<?php if ( $highlights && is_array( $highlights ) ) : ?>
+				<ul class="shop-menu-hero__highlights bubble-list">
+					<?php foreach ( $highlights as $highlight ) : ?>
+						<?php if ( ! empty( $highlight['text'] ) ) : ?><li><?php echo esc_html( $highlight['text'] ); ?></li><?php endif; ?>
+					<?php endforeach; ?>
+				</ul>
 			<?php endif; ?>
 
-			<?php if ( ! empty( $page_description ) ) : ?>
-				<div class="shop-hero-description">
-					<?php echo wp_kses_post( $page_description ); ?>
-				</div>
+			<?php if ( $description ) : ?><div class="shop-menu-hero__description"><?php echo wp_kses_post( $description ); ?></div><?php endif; ?>
+
+			<?php if ( $button && function_exists( 'bubble_stop_render_button' ) ) : ?>
+				<div class="shop-menu-hero__action"><?php bubble_stop_render_button( $button, [ 'style' => 'btn-primary', 'show_icon' => false ] ); ?></div>
 			<?php endif; ?>
 		</div>
 
-		<?php if ( $hero_image ) : ?>
-			<div class="shop-hero-media">
+		<?php if ( $image ) : ?>
+			<div class="shop-menu-hero__media">
 				<?php
 				if ( function_exists( 'bubble_stop_render_responsive_picture' ) ) {
 					bubble_stop_render_responsive_picture(
+						$image,
 						[
-							'ID'  => $hero_image['ID'],
-							'url' => $hero_image['url'],
-							'alt' => $hero_image['alt'] ?? $page_title,
-						],
-						[
-							'class' => 'shop-hero-image',
-							'sizes' => '(min-width: 768px) 50vw, 100vw',
+							'class' => 'shop-menu-hero__image',
+							'alt'   => $image['alt'] ?? '',
+							'sizes' => '(max-width: 767px) 80vw, 40vw',
 						]
 					);
 				}
 				?>
 			</div>
 		<?php endif; ?>
-
 	</div>
-</div>
+</section>
