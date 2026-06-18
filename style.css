@@ -90,24 +90,33 @@ Add all project-specific overrides and custom styles below.
 }
 
 .product-single-v2__intro-title {
-	font-size: clamp(2.5rem, 5vw, 4.5rem);
 	font-weight: 600;
-	color: var(--bubb-color-primary);
-	margin-bottom: 2.5rem;
+	color: #000;
+	font-size: 3.875rem;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -3.1px;
+	text-transform: capitalize;
+}
+
+.product-single-v2__container {
+	margin-top: 3.9375rem;
 }
 
 .product-single-v2__card {
 	background-color: #fff;
 	border-radius: 3.125rem;
-	padding: clamp(1.5rem, 4vw, 4.5rem);
-	max-width: 1200px;
+	padding-top: 2.0625rem;
+	padding-right: 2.8125rem;
+	padding-bottom: 3.125rem;
+	padding-left: 2.8125rem;
 	margin: 0 auto;
 }
 
 .product-single-v2__grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: clamp(2rem, 5vw, 5.5rem);
+	gap: 3.5625rem;
 	align-items: center;
 }
 
@@ -125,17 +134,20 @@ Add all project-specific overrides and custom styles below.
 }
 
 .product-single-v2__title {
-	font-size: clamp(2rem, 4vw, 3.5rem);
+	font-size: clamp(2rem, 4vw, 3.25rem);
+	color: #000;
+	font-style: normal;
 	font-weight: 600;
-	color: var(--bubb-color-primary);
-	margin-bottom: 1.5rem;
+	line-height: normal;
+	letter-spacing: -1.04px;
+	text-transform: capitalize;
 }
 
 .product-single-v2__prices {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 2rem;
-	margin-bottom: 2rem;
+	gap: 2.375rem;
+	margin-top: 1.875rem;
 	align-items: center;
 }
 
@@ -145,45 +157,61 @@ Add all project-specific overrides and custom styles below.
 	gap: 0.75rem;
 }
 
+.product-single-v2__description {
+	margin-top: 1.875rem;
+}
+
 .product-single-v2__price-label {
 	font-family: var(--bubb-font-ui);
 	font-size: 1rem;
 	color: var(--bubb-color-mid);
 }
 
-.product-single-v2__price-value,
+.product-single-v2__price-value, 
 .price {
 	display: inline-flex;
-	padding: 0.5rem 1.5rem;
-	border: 1px solid #000;
+	padding: 0.4rem 1.5rem;
+	border: 1px solid #636160;
 	border-radius: 2rem;
-	font-weight: 600;
+	font-weight: 400;
 	font-size: 1.125rem;
 	min-width: 100px;
 	justify-content: center;
+	line-height: 100%;
+	color: #000000;
 }
 
 .product-single-v2__description-label {
-	font-size: 1.5rem;
-	font-weight: 600;
-	margin-bottom: 0.75rem;
+	color: #000;
+	font-family: var(--bubb-font-body);
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	letter-spacing: -1px;
+	text-transform: capitalize;
+	margin-bottom: 0;
 }
 
 .product-single-v2__description-text {
 	color: var(--bubb-color-dark);
 	line-height: 1.6;
 	font-size: 1.125rem;
-	margin-bottom: 2.5rem;
+	margin-top: .375rem;
 }
 
 .product-single-v2__button {
 	background-color: #636160;
 	color: #fff;
 	border: none;
-	padding: 1rem 3rem;
-	font-size: 1.25rem;
+	padding: .65rem 3rem;
+	font-size: 1.125rem;
 	border-radius: 3rem;
 	transition: background-color var(--bubb-transition);
+	line-height: 166.667%;
+}
+.product-single-v2__actions {
+	margin-top: 2rem;
 }
 
 .product-single-v2__button:hover {
@@ -199,19 +227,38 @@ Add all project-specific overrides and custom styles below.
 }
 
 @media (max-width: 767px) {
+
+	.product-single-v2__container {
+		margin-top: 2.5rem;
+	}
+
 	.product-single-v2__card {
+		background-color: #fff;
 		border-radius: 2rem;
+		padding-top: 2rem;
+		padding-right: 1.5rem;
+		padding-bottom: 3rem;
+		padding-left: 1.5rem;
+		margin: 0 auto;
 	}
 	
 	.product-single-v2__intro-title {
 		font-size: 2.5rem;
 	}
+
+	.product-single-v2__prices {
+		gap: 1rem;
+	}
 }
 
 /* Menu Page Hero Banner */
 .menu-hero-banner {
-	position: relative;
-	z-index: 1;
+	background: rgba(200, 179, 251, 0.18);
+	padding-left: 6.25rem;
+	padding-right: 6.25rem;
+	padding-bottom: 3.75rem;
+	border-radius: 2.0625rem;
+	margin-top: 1.375rem;
 }
 
 .menu-hero-banner__container {
@@ -224,24 +271,22 @@ Add all project-specific overrides and custom styles below.
 
 .menu-hero-banner__grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 21.4375rem;
 	gap: clamp(2rem, 5vw, 4rem);
-	align-items: center;
 }
 
 .menu-hero-banner__content-card {
 	background-color: #fff;
 	border-radius: 2rem;
-	padding: clamp(2rem, 4vw, 3.5rem);
-	margin-bottom: clamp(1.5rem, 4vw, 3rem);
+	padding: 2rem;
 }
 
 .menu-hero-banner__title {
-	font-size: clamp(2rem, 3.5vw, 3rem);
+	font-size: 2.625rem;
 	font-weight: 600;
-	color: var(--bubb-color-primary);
+	color: #000;
 	line-height: 1.1;
-	margin-bottom: 2rem;
+	width: 78%;
 }
 
 .menu-hero-banner__list {
@@ -255,7 +300,7 @@ Add all project-specific overrides and custom styles below.
 	padding-left: 1.5rem;
 	margin-bottom: 0.75rem;
 	font-size: 1.125rem;
-	color: var(--bubb-color-mid);
+	color: var(--bubb-color-dark);
 }
 
 .menu-hero-banner__list li::before {
@@ -263,29 +308,29 @@ Add all project-specific overrides and custom styles below.
 	position: absolute;
 	left: 0;
 	top: 0.5rem;
-	width: 0.5rem;
-	height: 0.5rem;
+	width: 1.0036rem;
+	height: 1.0036rem;
 	background-color: var(--bubb-color-mid);
 	border-radius: 50%;
 }
 
 .menu-hero-banner__description {
-	color: var(--bubb-color-mid);
+	color: var(--bubb-color-dark);
 	line-height: 1.6;
 	font-size: 1.125rem;
-	margin-bottom: 2.5rem;
 }
 
 .menu-hero-banner__button {
 	background-color: #636160;
 	color: #fff;
 	border: none;
-	padding: 1rem 2.5rem;
+	padding: .63rem 2.5rem;
 	font-size: 1.125rem;
 	border-radius: 3rem;
 	display: inline-flex;
 	text-decoration: none;
 	transition: background-color var(--bubb-transition);
+	margin-top: 1.5rem;
 }
 
 .menu-hero-banner__button:hover {
@@ -307,18 +352,42 @@ Add all project-specific overrides and custom styles below.
 }
 
 .menu-section-header__eyebrow {
-	font-family: var(--bubb-font-ui);
-	font-size: 1.125rem;
-	color: var(--bubb-color-primary);
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	margin-bottom: 1rem;
+	color: #032143;
+	text-align: center;
+	font-family: "BDO Grotesk";
+	font-size: 1.375rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	text-transform: capitalize;
+	margin-bottom: 0;
 }
 
 .menu-section-header__title {
-	font-size: clamp(2.5rem, 5vw, 4.5rem);
+	color: #000;
+	text-align: center;
+	font-family: Urbanist;
+	font-size: 3.875rem;
+	font-style: normal;
 	font-weight: 600;
-	color: var(--bubb-color-secondary);
+	line-height: normal;
+	letter-spacing: -3.1px;
+	text-transform: capitalize;
+	margin-top: 1.125rem;
+}
+
+@media (max-width: 1199px) {
+	.menu-hero-banner {
+		padding-left: 3rem;
+		padding-right: 3rem;
+		padding-bottom: 3rem;
+	}
+	.menu-hero-banner__grid {
+		display: grid;
+		grid-template-columns: 1fr 18.438rem;
+		gap: clamp(2rem, 5vw, 4rem);
+	}
+
 }
 
 @media (max-width: 991px) {
@@ -334,11 +403,44 @@ Add all project-specific overrides and custom styles below.
 	.menu-hero-banner__container {
 		padding-bottom: 0;
 	}
+
+
+	.menu-section-header__title {
+		font-size: 3rem;
+	}
+}
+
+@media (max-width: 767px) {
+
+	.menu-hero-banner {
+		padding-left: 1rem;
+		padding-right: 1rem;
+		padding-bottom: 1rem;
+		padding-top: 1rem;
+	}
+	.menu-hero-banner__title {
+		font-size: 2rem;
+		font-weight: 600;
+		color: #000;
+		line-height: 1.1;
+		width: 100%;
+	}
+
+	.menu-section-header__title {
+		font-size: 2.5rem;
+	}
+
 }
 
 /* Menu Page Category Blocks */
 .shop-category-block {
-	margin-top: clamp(3rem, 6vw, 5rem);
+	margin-top: 3.125rem;
+	background: var(--bubb-color-light);
+	padding-top: 5.375rem;
+	padding-right: 2.0625rem;
+	padding-bottom: 4.875rem;
+	padding-left: 2.0625rem;
+	border-radius: 2.0625rem;
 }
 
 .shop-category-block__header {
@@ -346,7 +448,6 @@ Add all project-specific overrides and custom styles below.
 	justify-content: space-between;
 	align-items: flex-end;
 	margin-bottom: 2rem;
-	border-bottom: 1px solid rgba(0,0,0,0.05);
 	padding-bottom: 1.5rem;
 }
 
@@ -358,10 +459,14 @@ Add all project-specific overrides and custom styles below.
 }
 
 .shop-category-block__title {
-	font-size: 2.25rem;
+	color: #000;
+	font-family: Urbanist;
+	font-size: 2.625rem;
+	font-style: normal;
 	font-weight: 600;
-	margin: 0;
-	color: var(--bubb-color-primary);
+	line-height: normal;
+	letter-spacing: -2.1px;
+	text-transform: capitalize;
 }
 
 .shop-category-block__subtitle {
@@ -381,13 +486,26 @@ Add all project-specific overrides and custom styles below.
 }
 
 .shop-category-block__price span {
-	font-size: 0.875rem;
-	color: var(--bubb-color-mid);
+	color: #000;
+	text-align: center;
+	font-family: "BDO Grotesk";
+	font-size: 1.125rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	text-transform: capitalize;
 }
 
 .shop-category-block__price strong {
 	font-size: 1.125rem;
-	color: var(--bubb-color-primary);
+	background: var(--bubb-color-button);
+	border: 1px solid var(--bubb-color-button);
+	color: var(--bubb-color-light);
+	text-align: center;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	text-transform: capitalize;
 }
 
 .shop-category-block__controls {
@@ -397,6 +515,9 @@ Add all project-specific overrides and custom styles below.
 
 .shop-category-block__carousel {
 	margin: 0 -0.9375rem;
+	/* display: flex;
+	gap: .8125rem;
+	justify-content: center; */
 }
 
 .shop-category-block__carousel .slick-slide {
@@ -408,12 +529,30 @@ Add all project-specific overrides and custom styles below.
 	padding: 1rem 0;
 }
 
+.bubble-carousel-arrow {
+	width: 3.0611rem;
+	height: 3.0611rem;
+	flex-shrink: 0;
+	border-radius: 3.125rem;
+	border: 1px solid var(--bubb-color-primary);
+	background: transparent;
+	color: var(--bubb-color-primary);
+	font-size: 1.25rem;
+	font-weight: 300;
+	transition: all 0.3s ease;
+}
+
+.bubble-carousel-arrow:hover {
+	background: var(--bubb-color-primary);
+	color: var(--bubb-color-light);
+}
+
 /* Menu Product Card */
 .menu-product-card {
 	display: flex !important;
 	flex-direction: column;
 	height: 100%;
-	padding: 0.75rem;
+	padding: 1.0625rem;
 	background: #eef5ff;
 	border-radius: 1.25rem;
 	transition: transform var(--bubb-transition);
@@ -443,6 +582,8 @@ Add all project-specific overrides and custom styles below.
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-direction: column;
+	gap: .375rem;
 }
 
 .menu-product-card__title {
@@ -462,8 +603,8 @@ Add all project-specific overrides and custom styles below.
 	justify-content: center;
 	width: 2.5rem;
 	height: 2.5rem;
-	background: #fff;
-	color: var(--bubb-color-primary);
+	background: var(--bubb-color-button);
+	color: var(--bubb-color-light);
 	border-radius: 50%;
 	transition: background-color var(--bubb-transition), color var(--bubb-transition);
 }
@@ -473,11 +614,25 @@ Add all project-specific overrides and custom styles below.
 	color: #fff;
 }
 
+@media (max-width: 991px) {
+	.shop-category-block__title {
+		font-size: 2.25rem;
+	}
+
+}
 @media (max-width: 767px) {
+
 	.shop-category-block__header {
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 1.5rem;
+		margin-bottom: 0;
+	}
+
+	.shop-category-block {
+		margin-top: clamp(3rem, 6vw, 5rem);
+		padding-top: 2.375rem;
+		padding-bottom: 1.875rem;
 	}
 	
 	.shop-category-block__details {
@@ -487,7 +642,13 @@ Add all project-specific overrides and custom styles below.
 	.shop-category-block__controls {
 		display: none;
 	}
+
+	.shop-category-block__title {
+		font-size: 2rem;
+	}
+
 }
+
 .site-header {
 	position: sticky;
 	top: 0;
@@ -1687,12 +1848,18 @@ Add all project-specific overrides and custom styles below.
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
+@media only screen and (max-width: 767px) {
+	.footer-card {
+		padding: 2rem;
+	}
+}
 
 @media only screen and (max-width: 575px) {
 	.footer-card {
 		grid-template-columns: 1fr;
 		gap: 2rem;
 		border-radius: 1rem;
+		padding: 2rem;
 	}
 
 	.footer-brand-column {
@@ -1721,8 +1888,11 @@ Add all project-specific overrides and custom styles below.
 	text-decoration: none;
 	color: inherit;
 	transition: transform var(--bubb-transition);
+	overflow: hidden;
+	padding: 2.0625rem;
+	background: #fff;
+	border-radius: 2.0625rem;
 }
-
 a.delivery-partner-card:hover {
 	transform: translateY(-5px);
 }
@@ -1732,6 +1902,7 @@ a.delivery-partner-card:hover {
 	overflow: hidden;
 	margin-bottom: 1.25rem;
 	background-color: #f7f7f7;
+	border-radius: 2.0625rem;
 }
 
 .delivery-partner-card__image {

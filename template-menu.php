@@ -25,7 +25,7 @@ $categories = bubble_stop_get_menu_categories();
 	
 	<?php if ( $hero_heading || $hero_image ) : ?>
 	<section class="menu-hero-banner layout-padding pt-50 pt-md-70">
-		<div class="menu-hero-banner__container">
+		<div class="menu-hero-banner-inner">
 			<div class="menu-hero-banner__grid">
 				<div class="menu-hero-banner__content-card">
 					<?php if ( $hero_heading ) : ?>

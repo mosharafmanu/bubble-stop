@@ -12,11 +12,11 @@ $order_link    = get_field( 'order_link' );
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'product-single-v2' ); ?>>
 	
-	<div class="product-single-v2__intro layout-padding pt-50 pt-md-70">
+	<div class="product-single-v2__intro layout-padding pt-40">
 		<h1 class="product-single-v2__intro-title text-center"><?php esc_html_e( 'Create Your Drink', 'bubble-stop' ); ?></h1>
 	</div>
 
-	<div class="product-single-v2__container layout-padding pb-50 pb-md-70 pb-lg-100">
+	<div class="product-single-v2__container layout-padding pb-30 ">
 		<div class="product-single-v2__card">
 			<div class="product-single-v2__grid">
 				
