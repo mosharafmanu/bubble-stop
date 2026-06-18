@@ -44,13 +44,11 @@ if ( ! function_exists( 'bubble_stop_breadcrumb' ) ) {
 			echo ' <span class="breadcrumb-separator">/</span> ';
 			echo '<span class="current">' . esc_html( get_the_title() ) . '</span>';
 
-		} elseif ( is_singular( 'product' ) ) {
-			if ( function_exists( 'wc_get_page_id' ) ) {
-				$shop_page_id = wc_get_page_id( 'shop' );
-				if ( $shop_page_id && $shop_page_id > 0 ) {
-					echo '<a href="' . esc_url( get_permalink( $shop_page_id ) ) . '">' . esc_html( get_the_title( $shop_page_id ) ) . '</a>';
-					echo ' <span class="breadcrumb-separator">/</span> ';
-				}
+		} elseif ( is_singular( 'bubble_product' ) ) {
+			$products_archive_link = get_post_type_archive_link( 'bubble_product' );
+			if ( $products_archive_link ) {
+				echo '<a href="' . esc_url( $products_archive_link ) . '">' . esc_html__( 'Products', 'bubble-stop' ) . '</a>';
+				echo ' <span class="breadcrumb-separator">/</span> ';
 			}
 			echo '<span class="current">' . esc_html( get_the_title() ) . '</span>';
 

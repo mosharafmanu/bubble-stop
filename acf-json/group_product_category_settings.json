@@ -1,0 +1,40 @@
+{
+    "key": "group_product_category_settings",
+    "title": "Product Category Settings",
+    "fields": [
+        {
+            "key": "field_product_category_subtitle",
+            "label": "Subtitle",
+            "name": "menu_subtitle",
+            "type": "text",
+            "instructions": "A short subtitle displayed below the category name (e.g. 'Fresh and Fruity').",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "product_category"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

@@ -1,9 +1,9 @@
 {
-    "key": "group_shop_page",
-    "title": "Shop Page Settings",
+    "key": "group_menu_page",
+    "title": "Menu Page Settings",
     "fields": [
         {
-            "key": "field_shop_hero_tab",
+            "key": "field_menu_hero_tab",
             "label": "Hero",
             "name": "",
             "type": "tab",
@@ -50,7 +50,6 @@
             "name": "shop_hero_description",
             "type": "wysiwyg",
             "required": 0,
-            "instructions": "Falls back to the Shop page content when left empty.",
             "tabs": "all",
             "toolbar": "basic",
             "media_upload": 0,
@@ -70,15 +69,15 @@
             "name": "shop_hero_image",
             "type": "image",
             "required": 0,
-            "instructions": "Use a transparent PNG or WebP product cutout. Falls back to the Shop page featured image.",
+            "instructions": "Use a transparent PNG or WebP product cutout.",
             "return_format": "array",
             "preview_size": "medium",
             "library": "all",
             "mime_types": "png,webp,jpg,jpeg,svg"
         },
         {
-            "key": "field_shop_menu_tab",
-            "label": "Menu",
+            "key": "field_menu_section_tab",
+            "label": "Menu Section",
             "name": "",
             "type": "tab",
             "required": 0,
@@ -91,7 +90,7 @@
             "name": "menu_eyebrow",
             "type": "text",
             "required": 0,
-            "placeholder": "Our Menu"
+            "default_value": "Our Menu"
         },
         {
             "key": "field_shop_menu_heading",
@@ -99,26 +98,15 @@
             "name": "menu_heading",
             "type": "text",
             "required": 0,
-            "placeholder": "Create Your Drink"
-        },
-        {
-            "key": "field_shop_products_per_category",
-            "label": "Products Per Category",
-            "name": "products_per_category",
-            "type": "number",
-            "required": 0,
-            "default_value": 12,
-            "min": 1,
-            "max": 30,
-            "step": 1
+            "default_value": "Create Your Drink"
         }
     ],
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "page_template",
                 "operator": "==",
-                "value": "page"
+                "value": "template-menu.php"
             }
         ]
     ],
@@ -129,7 +117,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Used by the page assigned as the WooCommerce Shop page.",
-    "show_in_rest": 0,
-    "modified": 1781008505
+    "description": "Settings for the Menu page banner and categories.",
+    "show_in_rest": 0
 }

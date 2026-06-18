@@ -225,9 +225,8 @@
 		// ─────────────────────────────────────────────────────────────
 
 		$( 'a[href^="#"]' ).on( 'click', function ( event ) {
-			// Ignore programmatic triggers (e.g. WooCommerce activating its
-			// description/reviews tabs via $(...).trigger('click') on load) —
-			// only react to genuine user clicks on in-page nav links.
+			// Ignore programmatic triggers — only react to genuine user
+			// clicks on in-page nav links.
 			if ( event.isTrigger ) return;
 
 			const href = $( this ).attr( 'href' );
@@ -364,5 +363,18 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
 	containers.forEach( function ( el ) {
 		observer.observe( el );
+	} );
+
+	// ─────────────────────────────────────────────────────────────
+	// TEBI ORDERING WIDGET TRIGGER
+	// Ensures our custom "Order Now" button triggers the Tebi popup.
+	// ─────────────────────────────────────────────────────────────
+	$( document ).on( 'click', '.js-tebi-trigger', function ( e ) {
+		if ( typeof tebi === 'function' ) {
+			e.preventDefault();
+			tebi( 'open', 'takeaway' );
+		}
+		// If tebi function is not available, the default #tebi-takeaway 
+		// anchor will still work via the widget's hash listener.
 	} );
 } );

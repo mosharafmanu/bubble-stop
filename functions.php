@@ -133,11 +133,15 @@ function bubble_stop_scripts() {
 add_action('wp_enqueue_scripts', 'bubble_stop_scripts');
 
 // ─────────────────────────────────────────────────────────────────
-// EDITOR — Gutenberg disabled; theme uses ACF Flexible Content
+// EDITOR — Gutenberg disabled for pages/posts; enabled for bubble_product
 // ─────────────────────────────────────────────────────────────────
 
-add_filter('use_block_editor_for_post_type', '__return_false');
-add_filter('use_block_editor_for_post', '__return_false');
+add_filter('use_block_editor_for_post_type', function ($use_block_editor, $post_type) {
+    if ('bubble_product' === $post_type) {
+        return true;
+    }
+    return false;
+}, 10, 2);
 
 add_action('after_setup_theme', function () {
     remove_theme_support('widgets-block-editor');
@@ -174,6 +178,7 @@ add_filter('acf/settings/load_json', function ($paths) {
 // ─────────────────────────────────────────────────────────────────
 
 require get_template_directory() . '/inc/image-sizes.php';
+require get_template_directory() . '/inc/post-types.php';
 
 foreach (glob(get_template_directory() . '/inc/components/*/*.php') as $file) {
     require $file;
@@ -181,19 +186,6 @@ foreach (glob(get_template_directory() . '/inc/components/*/*.php') as $file) {
 
 foreach (glob(get_template_directory() . '/inc/helper-functions/*.php') as $file) {
     require $file;
-}
-
-// ─────────────────────────────────────────────────────────────────
-// WOOCOMMERCE
-// Self-contained, optional module — see inc/woocommerce/woocommerce-setup.php.
-// Guarded with file_exists() so projects that don't need WooCommerce can
-// delete the whole module (that file, woocommerce/, assets/{css,js}/woocommerce/,
-// .ai/WOOCOMMERCE.md) without touching this require.
-// ─────────────────────────────────────────────────────────────────
-
-$bubble_stop_woocommerce_setup = get_template_directory() . '/inc/woocommerce/woocommerce-setup.php';
-if (file_exists($bubble_stop_woocommerce_setup)) {
-    require $bubble_stop_woocommerce_setup;
 }
 
 // ─────────────────────────────────────────────────────────────────

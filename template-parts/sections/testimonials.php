@@ -51,12 +51,18 @@ $section_id = wp_unique_id( 'testimonials-' );
 
 					<?php if ( $author || $detail ) : ?>
 						<footer class="testimonial-card__author">
-							<?php if ( $author ) : ?>
-								<strong><?php echo esc_html( $author ); ?></strong>
-							<?php endif; ?>
-							<?php if ( $detail ) : ?>
-								<span><?php echo esc_html( $detail ); ?></span>
-							<?php endif; ?>
+							<div class="author-media">
+								<img src="http://localhost/ClientProjects/WordPress/2026/bubble-stop/wp-content/uploads/2026/06/Image-56.png" alt="">
+							</div>
+
+							<div class="author-info">
+								<?php if ( $author ) : ?>
+									<strong><?php echo esc_html( $author ); ?></strong>
+								<?php endif; ?>
+								<?php if ( $detail ) : ?>
+									<span><?php echo esc_html( $detail ); ?></span>
+								<?php endif; ?>
+							</div>
 						</footer>
 					<?php endif; ?>
 				</article>

@@ -118,12 +118,9 @@ if ( ! function_exists( 'bubble_stop_render_self_hosted_video' ) ) {
 		}
 
 		if ( empty( $poster_url ) && $args['autoplay_on_scroll'] ) {
-			global $product;
-			if ( $product && method_exists( $product, 'get_image_id' ) ) {
-				$image_id = $product->get_image_id();
-				if ( $image_id ) {
-					$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
-				}
+			$image_id = get_post_thumbnail_id();
+			if ( $image_id ) {
+				$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
 			}
 		}
 
@@ -278,12 +275,9 @@ if ( ! function_exists( 'bubble_stop_render_vimeo_video' ) ) {
 		}
 
 		if ( empty( $poster_url ) && $args['autoplay_on_scroll'] ) {
-			global $product;
-			if ( $product && method_exists( $product, 'get_image_id' ) ) {
-				$image_id = $product->get_image_id();
-				if ( $image_id ) {
-					$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
-				}
+			$image_id = get_post_thumbnail_id();
+			if ( $image_id ) {
+				$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
 			}
 		}
 
@@ -373,12 +367,9 @@ if ( ! function_exists( 'bubble_stop_render_cdn_video' ) ) {
 		}
 
 		if ( empty( $poster_url ) && $args['autoplay_on_scroll'] ) {
-			global $product;
-			if ( $product && method_exists( $product, 'get_image_id' ) ) {
-				$image_id = $product->get_image_id();
-				if ( $image_id ) {
-					$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
-				}
+			$image_id = get_post_thumbnail_id();
+			if ( $image_id ) {
+				$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
 			}
 		}
 

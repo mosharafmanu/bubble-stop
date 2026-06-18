@@ -25,7 +25,7 @@ Design Tokens
 	/* Brand Colors — Bubble Stop Figma palette */
     --bubb-color-primary:   #032143;   /* Deep navy — navigation and primary brand surfaces */
     --bubb-color-secondary: #636160;   /* Warm gray — display headings and neutral controls */
-    --bubb-color-accent:    #fdb46e;   /* Peach — icon circles and warm brand accents */
+    --bubb-color-accent:    #FDBC79;   /* Peach — icon circles and warm brand accents */
     --bubb-color-active:    #4eb8f9;   /* Sky blue — selected categories and active states */
     --bubb-color-highlight: #c8b3fb;   /* Soft lilac — decorative brand surfaces */
 
@@ -84,7 +84,410 @@ Client Project Styles
 Add all project-specific overrides and custom styles below.
 */
 
-/* Header */
+/* Single Product V2 */
+.product-single-v2 {
+	background-color: var(--bubb-color-subtle);
+}
+
+.product-single-v2__intro-title {
+	font-size: clamp(2.5rem, 5vw, 4.5rem);
+	font-weight: 600;
+	color: var(--bubb-color-primary);
+	margin-bottom: 2.5rem;
+}
+
+.product-single-v2__card {
+	background-color: #fff;
+	border-radius: 3.125rem;
+	padding: clamp(1.5rem, 4vw, 4.5rem);
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.product-single-v2__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(2rem, 5vw, 5.5rem);
+	align-items: center;
+}
+
+.product-single-v2__image-wrap {
+	border-radius: 2rem;
+	overflow: hidden;
+	background-color: #f7f7f7;
+}
+
+.product-single-v2__image {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.product-single-v2__title {
+	font-size: clamp(2rem, 4vw, 3.5rem);
+	font-weight: 600;
+	color: var(--bubb-color-primary);
+	margin-bottom: 1.5rem;
+}
+
+.product-single-v2__prices {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	margin-bottom: 2rem;
+	align-items: center;
+}
+
+.product-single-v2__price-row {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.product-single-v2__price-label {
+	font-family: var(--bubb-font-ui);
+	font-size: 1rem;
+	color: var(--bubb-color-mid);
+}
+
+.product-single-v2__price-value,
+.price {
+	display: inline-flex;
+	padding: 0.5rem 1.5rem;
+	border: 1px solid #000;
+	border-radius: 2rem;
+	font-weight: 600;
+	font-size: 1.125rem;
+	min-width: 100px;
+	justify-content: center;
+}
+
+.product-single-v2__description-label {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin-bottom: 0.75rem;
+}
+
+.product-single-v2__description-text {
+	color: var(--bubb-color-dark);
+	line-height: 1.6;
+	font-size: 1.125rem;
+	margin-bottom: 2.5rem;
+}
+
+.product-single-v2__button {
+	background-color: #636160;
+	color: #fff;
+	border: none;
+	padding: 1rem 3rem;
+	font-size: 1.25rem;
+	border-radius: 3rem;
+	transition: background-color var(--bubb-transition);
+}
+
+.product-single-v2__button:hover {
+	background-color: var(--bubb-color-primary);
+	color: #fff;
+}
+
+@media (max-width: 991px) {
+	.product-single-v2__grid {
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+	}
+}
+
+@media (max-width: 767px) {
+	.product-single-v2__card {
+		border-radius: 2rem;
+	}
+	
+	.product-single-v2__intro-title {
+		font-size: 2.5rem;
+	}
+}
+
+/* Menu Page Hero Banner */
+.menu-hero-banner {
+	position: relative;
+	z-index: 1;
+}
+
+.menu-hero-banner__container {
+	background-color: var(--bubb-color-subtle);
+	border-radius: 3.125rem;
+	padding: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem) 0 clamp(1.5rem, 4vw, 3rem);
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.menu-hero-banner__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(2rem, 5vw, 4rem);
+	align-items: center;
+}
+
+.menu-hero-banner__content-card {
+	background-color: #fff;
+	border-radius: 2rem;
+	padding: clamp(2rem, 4vw, 3.5rem);
+	margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+
+.menu-hero-banner__title {
+	font-size: clamp(2rem, 3.5vw, 3rem);
+	font-weight: 600;
+	color: var(--bubb-color-primary);
+	line-height: 1.1;
+	margin-bottom: 2rem;
+}
+
+.menu-hero-banner__list {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 2rem 0;
+}
+
+.menu-hero-banner__list li {
+	position: relative;
+	padding-left: 1.5rem;
+	margin-bottom: 0.75rem;
+	font-size: 1.125rem;
+	color: var(--bubb-color-mid);
+}
+
+.menu-hero-banner__list li::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0.5rem;
+	width: 0.5rem;
+	height: 0.5rem;
+	background-color: var(--bubb-color-mid);
+	border-radius: 50%;
+}
+
+.menu-hero-banner__description {
+	color: var(--bubb-color-mid);
+	line-height: 1.6;
+	font-size: 1.125rem;
+	margin-bottom: 2.5rem;
+}
+
+.menu-hero-banner__button {
+	background-color: #636160;
+	color: #fff;
+	border: none;
+	padding: 1rem 2.5rem;
+	font-size: 1.125rem;
+	border-radius: 3rem;
+	display: inline-flex;
+	text-decoration: none;
+	transition: background-color var(--bubb-transition);
+}
+
+.menu-hero-banner__button:hover {
+	background-color: var(--bubb-color-primary);
+	color: #fff;
+}
+
+.menu-hero-banner__media {
+	align-self: flex-end;
+	text-align: center;
+	margin-bottom: -1px; /* To sit perfectly on the bottom edge */
+}
+
+.menu-hero-banner__image {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.menu-section-header__eyebrow {
+	font-family: var(--bubb-font-ui);
+	font-size: 1.125rem;
+	color: var(--bubb-color-primary);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	margin-bottom: 1rem;
+}
+
+.menu-section-header__title {
+	font-size: clamp(2.5rem, 5vw, 4.5rem);
+	font-weight: 600;
+	color: var(--bubb-color-secondary);
+}
+
+@media (max-width: 991px) {
+	.menu-hero-banner__grid {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.menu-hero-banner__content-card {
+		margin-bottom: 0;
+	}
+
+	.menu-hero-banner__container {
+		padding-bottom: 0;
+	}
+}
+
+/* Menu Page Category Blocks */
+.shop-category-block {
+	margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+.shop-category-block__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-bottom: 2rem;
+	border-bottom: 1px solid rgba(0,0,0,0.05);
+	padding-bottom: 1.5rem;
+}
+
+.shop-category-block__details {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 2rem;
+}
+
+.shop-category-block__title {
+	font-size: 2.25rem;
+	font-weight: 600;
+	margin: 0;
+	color: var(--bubb-color-primary);
+}
+
+.shop-category-block__subtitle {
+	display: block;
+	font-family: var(--bubb-font-ui);
+	font-size: 0.875rem;
+	color: var(--bubb-color-mid);
+	text-transform: uppercase;
+	margin-top: 0.25rem;
+}
+
+.shop-category-block__price {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-family: var(--bubb-font-ui);
+}
+
+.shop-category-block__price span {
+	font-size: 0.875rem;
+	color: var(--bubb-color-mid);
+}
+
+.shop-category-block__price strong {
+	font-size: 1.125rem;
+	color: var(--bubb-color-primary);
+}
+
+.shop-category-block__controls {
+	display: flex;
+	gap: 0.75rem;
+}
+
+.shop-category-block__carousel {
+	margin: 0 -0.9375rem;
+}
+
+.shop-category-block__carousel .slick-slide {
+	padding: 0 0.9375rem;
+	height: auto;
+}
+
+.shop-category-block__carousel .slick-list {
+	padding: 1rem 0;
+}
+
+/* Menu Product Card */
+.menu-product-card {
+	display: flex !important;
+	flex-direction: column;
+	height: 100%;
+	padding: 0.75rem;
+	background: #eef5ff;
+	border-radius: 1.25rem;
+	transition: transform var(--bubb-transition);
+}
+
+.menu-product-card:hover {
+	transform: translateY(-5px);
+}
+
+.menu-product-card__image {
+	display: block;
+	aspect-ratio: 1.18 / 1;
+	overflow: hidden;
+	border-radius: 1rem;
+	background: #fff;
+}
+
+.menu-product-card__image-file {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.menu-product-card__body {
+	padding: 1.25rem 0.5rem 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.menu-product-card__title {
+	margin: 0;
+	font-size: 1.125rem;
+	font-weight: 500;
+}
+
+.menu-product-card__title a {
+	color: var(--bubb-color-secondary);
+	text-decoration: none;
+}
+
+.menu-product-card__link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	background: #fff;
+	color: var(--bubb-color-primary);
+	border-radius: 50%;
+	transition: background-color var(--bubb-transition), color var(--bubb-transition);
+}
+
+.menu-product-card__link:hover {
+	background-color: var(--bubb-color-primary);
+	color: #fff;
+}
+
+@media (max-width: 767px) {
+	.shop-category-block__header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1.5rem;
+	}
+	
+	.shop-category-block__details {
+		gap: 1rem;
+	}
+
+	.shop-category-block__controls {
+		display: none;
+	}
+}
 .site-header {
 	position: sticky;
 	top: 0;
@@ -103,7 +506,7 @@ Add all project-specific overrides and custom styles below.
 	grid-template-columns: minmax(6rem, 1fr) auto minmax(6rem, 1fr);
 	align-items: center;
 	min-height: 3.5rem;
-	padding: 0.5rem 2.625rem;
+	padding: 0.4rem 2.625rem;
 	background: var(--bubb-color-primary);
 	border-radius: 999px;
 	box-shadow: 0 0.5rem 1.5rem rgba(3, 33, 67, 0.08);
@@ -132,12 +535,12 @@ Add all project-specific overrides and custom styles below.
 	text-decoration: none;
 }
 
-.site-branding .site-logo,
+.site-branding .site-logo, 
 .site-branding img {
 	display: block;
 	width: auto;
-	max-width: 5.5rem;
-	max-height: 2.75rem;
+	max-width: 8.049rem;
+	max-height: 4.0148rem;
 	object-fit: contain;
 }
 
@@ -579,14 +982,19 @@ Add all project-specific overrides and custom styles below.
 }
 
 /* Hero section */
+.page-home {
+	margin-top: 8px;
+}
+
 .hero-section {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: clamp(24rem, 43vw, 34rem);
+	min-height: clamp(24rem, 43vw, 34.1rem);
 	margin-top: 0;
-	margin-bottom: 1.875rem;
-	padding: clamp(3.5rem, 7vw, 6rem) 1.875rem;
+	margin-bottom: 3.125rem;
+	padding-top: 4.375rem;
+	padding-bottom: 80px;
 	background: #eeedff;
 	border-radius: 1.5rem;
 	overflow: hidden;
@@ -605,7 +1013,7 @@ Add all project-specific overrides and custom styles below.
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: clamp(0.75rem, 2vw, 1.5rem);
+	gap: clamp(0.75rem, 2vw, 1rem);
 	width: min(100%, 41.25rem);
 }
 
@@ -621,6 +1029,7 @@ Add all project-specific overrides and custom styles below.
 
 .hero-section__artwork-line--second {
 	width: 100%;
+	margin-top: -1.75rem;
 }
 
 .hero-section__artwork-image {
@@ -641,8 +1050,11 @@ Add all project-specific overrides and custom styles below.
 	max-width: 35rem;
 	margin-top: 1.25rem;
 	color: var(--bubb-color-dark);
-	font-size: 0.9375rem;
-	line-height: 1.45;
+	text-align: center;
+	font-size: 1.125rem;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 166.667%;
 }
 
 .hero-section__description p {
@@ -652,18 +1064,18 @@ Add all project-specific overrides and custom styles below.
 .hero-section__actions {
 	display: flex;
 	justify-content: center;
-	margin-top: 1.5rem;
+	margin-top: 2rem;
 }
 
 .hero-section__button.site-btn {
 	min-height: 2.5rem;
-	padding: 0.5rem 1.75rem;
+	padding: 0.5rem 2.3rem;
 	font-size: 0.875rem;
 }
 
 @media only screen and (max-width: 767px) {
 	.hero-section {
-		min-height: 29rem;
+		min-height: 24rem;
 		padding: 3.5rem 1.25rem;
 		border-radius: 1rem;
 	}
@@ -689,8 +1101,8 @@ Add all project-specific overrides and custom styles below.
 
 /* Smart 50/50 media content */
 .smart-media-content {
-	padding-top: clamp(4rem, 8vw, 7.5rem);
-	padding-bottom: clamp(4rem, 8vw, 7.5rem);
+	padding-top: 7.5rem;
+	padding-bottom: 1.25rem;
 	background: var(--bubb-color-subtle);
 }
 
@@ -698,7 +1110,7 @@ Add all project-specific overrides and custom styles below.
 	display: grid;
 	grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
 	align-items: center;
-	gap: clamp(2.5rem, 6vw, 6rem);
+	gap: 43px;
 }
 
 .smart-media-content.media-right .smart-media-content__media {
@@ -745,15 +1157,23 @@ Add all project-specific overrides and custom styles below.
 }
 
 .smart-media-content__title {
-	margin-bottom: 1rem;
-	font-size: clamp(2.5rem, 4.2vw, 4rem);
-	line-height: 1.05;
+	margin-bottom: 0;
+	font-size: clamp(2.5rem, 4.2vw, 72px);
+	color: #636160;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	letter-spacing: -1.44px;
+	text-transform: capitalize;
 }
 
 .smart-media-content__copy {
 	color: var(--bubb-color-dark);
-	font-size: 1rem;
-	line-height: 1.55;
+	font-size: 1.125rem;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 166.667%;
+	margin-top: 1.25rem;
 }
 
 .smart-media-content__copy p {
@@ -775,19 +1195,22 @@ Add all project-specific overrides and custom styles below.
 	position: relative;
 	padding-left: 1.5rem;
 	color: var(--bubb-color-secondary);
-	font-size: 1rem;
-	line-height: 1.4;
+	font-size: 1.125rem;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 166.667%;
 }
 
 .bubble-list li::before {
 	content: '';
 	position: absolute;
-	top: 0.35em;
+	top: 50%;
 	left: 0;
-	width: 0.75rem;
-	height: 0.75rem;
+	width: 1.0036rem;
+	height: 1.0036rem;
 	background: var(--bubb-color-active);
 	border-radius: 50%;
+	transform: translateY(-50%);
 }
 
 .smart-media-content__highlights {
@@ -826,267 +1249,9 @@ Add all project-specific overrides and custom styles below.
 	}
 }
 
-/* Product category showcase */
-.product-category-showcase {
-	padding-top: clamp(3.5rem, 7vw, 6.25rem);
-	padding-bottom: clamp(3.5rem, 7vw, 6.25rem);
-	background: var(--bubb-color-subtle);
-}
-
-.product-category-showcase__header {
-	display: flex;
-	align-items: flex-end;
-	justify-content: space-between;
-	gap: 2rem;
-}
-
-.product-category-showcase__eyebrow {
-	margin: 0 0 0.75rem;
-	color: var(--bubb-color-primary);
-	font-family: var(--bubb-font-ui);
-	font-size: 1.125rem;
-	font-weight: 400;
-}
-
-.product-category-showcase__title {
-	margin: 0;
-	font-size: clamp(2.75rem, 5vw, 4.25rem);
-	line-height: 1;
-}
-
-.product-category-showcase__controls {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	flex-shrink: 0;
-}
-
-.product-category-showcase__navigation {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 2rem;
-	margin-top: 1.75rem;
-}
-
-.bubble-carousel-arrow {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 2.5rem;
-	height: 2.5rem;
-	padding: 0;
-	color: #0b4bb3;
-	background: transparent;
-	border: 0.09375rem solid currentColor;
-	border-radius: 50%;
-	font-size: 1.375rem;
-	line-height: 1;
-	cursor: pointer;
-	transition: color var(--bubb-transition), background-color var(--bubb-transition);
-}
-
-.bubble-carousel-arrow:hover,
-.bubble-carousel-arrow:focus-visible {
-	color: var(--bubb-color-light);
-	background: #0b4bb3;
-}
-
-.product-category-showcase__tabs {
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-	gap: 0.75rem;
-	min-width: 0;
-}
-
-.product-category-showcase__tab {
-	min-height: 2.375rem;
-	padding: 0.375rem 1.25rem;
-	color: var(--bubb-color-secondary);
-	background: transparent;
-	border: 0.0625rem solid var(--bubb-color-secondary);
-	border-radius: 999px;
-	font-family: var(--bubb-font-ui);
-	font-size: 1rem;
-	font-weight: 300;
-	cursor: pointer;
-	transition: color var(--bubb-transition), background-color var(--bubb-transition), border-color var(--bubb-transition);
-}
-
-.product-category-showcase__tab:hover,
-.product-category-showcase__tab.is-active {
-	color: var(--bubb-color-light);
-	background: var(--bubb-color-active);
-	border-color: var(--bubb-color-active);
-}
-
-.product-category-showcase__tab:disabled {
-	cursor: wait;
-	opacity: 0.65;
-}
-
-.product-category-showcase__panel {
-	position: relative;
-	margin-top: 2rem;
-	padding: 2rem 1.5rem;
-	background: var(--bubb-color-light);
-	border-radius: 1.75rem;
-}
-
-.product-category-showcase__carousel {
-	transition: opacity var(--bubb-transition);
-}
-
-.product-category-showcase.is-loading .product-category-showcase__carousel {
-	opacity: 0.35;
-	pointer-events: none;
-}
-
-.product-category-showcase.is-loading .product-category-showcase__panel::after {
-	content: '';
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 2rem;
-	height: 2rem;
-	margin: -1rem 0 0 -1rem;
-	border: 0.1875rem solid rgba(3, 33, 67, 0.15);
-	border-top-color: var(--bubb-color-primary);
-	border-radius: 50%;
-	animation: product-showcase-spin 0.75s linear infinite;
-}
-
-@keyframes product-showcase-spin {
-	to { transform: rotate(360deg); }
-}
-
-.product-category-showcase__carousel .slick-list {
-	margin: 0 -0.5rem;
-}
-
-.product-category-showcase__carousel .slick-slide {
-	height: auto;
-	margin: 0 0.5rem;
-}
-
-.product-category-showcase__carousel .slick-track {
-	display: flex;
-}
-
-.product-category-showcase__carousel .slick-slide > div {
-	height: 100%;
-}
-
-.menu-product-card {
-	display: flex !important;
-	flex-direction: column;
-	height: 100%;
-	padding: 0.75rem;
-	background: #eef5ff;
-	border-radius: 1.25rem;
-}
-
-.menu-product-card__image {
-	display: block;
-	aspect-ratio: 1.18 / 1;
-	overflow: hidden;
-	border-radius: 1rem;
-}
-
-.menu-product-card__image picture,
-.menu-product-card__image img,
-.menu-product-card__image-file {
-	display: block;
-	width: 100%;
-	height: 100%;
-}
-
-.menu-product-card__image img,
-.menu-product-card__image-file {
-	object-fit: cover;
-	transition: transform var(--bubb-transition);
-}
-
-.menu-product-card:hover .menu-product-card__image img {
-	transform: scale(1.03);
-}
-
-.menu-product-card__body {
-	padding: 1.25rem 0.5rem 0.5rem;
-	text-align: center;
-}
-
-.menu-product-card__title {
-	margin: 0;
-	font-size: 1.25rem;
-	font-weight: 400;
-	line-height: 1.2;
-}
-
-.menu-product-card__title a {
-	color: var(--bubb-color-secondary);
-	text-decoration: none;
-}
-
-.menu-product-card__description {
-	margin-top: 0.5rem;
-	color: var(--bubb-color-dark);
-	font-size: 0.9375rem;
-	line-height: 1.45;
-}
-
-.menu-product-card__description p {
-	margin: 0;
-}
-
-.product-category-showcase__empty {
-	margin: 0;
-	padding: 2rem;
-	text-align: center;
-}
-
-.product-category-showcase__actions {
-	display: flex;
-	justify-content: center;
-	margin-top: 2rem;
-}
-
-@media only screen and (max-width: 767px) {
-	.product-category-showcase__header {
-		align-items: center;
-	}
-
-	.product-category-showcase__controls {
-		display: none;
-	}
-
-	.product-category-showcase__tabs {
-		flex: 1;
-		flex-wrap: nowrap;
-		overflow-x: auto;
-		padding-bottom: 0.5rem;
-		scrollbar-width: none;
-	}
-
-	.product-category-showcase__tabs::-webkit-scrollbar {
-		display: none;
-	}
-
-	.product-category-showcase__tab {
-		flex: 0 0 auto;
-	}
-
-	.product-category-showcase__panel {
-		padding: 1.25rem 0.75rem;
-		border-radius: 1.25rem;
-	}
-}
-
 /* Loyalty rewards */
 .loyalty-rewards {
 	padding-top: clamp(3rem, 6vw, 5rem);
-	padding-bottom: clamp(3rem, 6vw, 5rem);
 	background: var(--bubb-color-subtle);
 }
 
@@ -1105,49 +1270,48 @@ Add all project-specific overrides and custom styles below.
 	background: var(--bubb-color-light);
 	border-radius: 1.5rem;
 	text-align: center;
+	position: relative;
 }
 
 .loyalty-rewards__eyebrow {
-	margin: 0 0 0.75rem;
+	margin-bottom: 0;
 	color: var(--bubb-color-primary);
 	font-family: var(--bubb-font-ui);
-	font-size: 1.125rem;
+	font-size: 1.375rem;
 	font-weight: 400;
+	text-transform: capitalize;
 }
 
 .loyalty-rewards__title {
-	margin: 0;
-	font-size: clamp(2.75rem, 5vw, 4.5rem);
-	font-weight: 400;
-	line-height: 1;
+	color: #636160;
+	font-size: 3.875rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	letter-spacing: -0.0775rem;
+	text-transform: capitalize;
+	margin-top: .5rem;
+	margin-bottom: 0;
 }
 
-.loyalty-rewards__media {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 8.75rem));
-	align-items: center;
-	justify-content: center;
-	gap: clamp(1.5rem, 4vw, 3rem);
-	width: 100%;
-	margin-top: 1.25rem;
+.loyalty-rewards__actions {
+	margin: 1.5rem 0 2rem;
 }
 
-.loyalty-rewards__qr,
-.loyalty-rewards__artwork,
-.loyalty-rewards__qr picture,
-.loyalty-rewards__artwork picture {
-	display: block;
-	width: 100%;
+.loyalty-rewards__button {
+	background-color: var(--bubb-color-secondary);
+	color: #fff;
+	border: none;
+	padding: 1rem 3rem;
+	font-size: 1.25rem;
+	border-radius: 3rem;
+	display: inline-block;
+	text-decoration: none;
+	transition: background-color var(--bubb-transition);
 }
 
-.loyalty-rewards__qr-image,
-.loyalty-rewards__artwork-image {
-	display: block;
-	width: 100%;
-	height: auto;
-	max-height: 8.75rem;
-	margin: 0 auto;
-	object-fit: contain;
+.loyalty-rewards__button:hover {
+	background-color: var(--bubb-color-primary);
 }
 
 .loyalty-rewards__reward {
@@ -1163,15 +1327,22 @@ Add all project-specific overrides and custom styles below.
 }
 
 .loyalty-rewards__reward strong {
-	font-size: 1.125rem;
-	font-weight: 400;
-	line-height: 1.2;
+	color: #FFF;
+	text-align: center;
+	font-size: 1.375rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	text-transform: capitalize;
 }
 
 .loyalty-rewards__reward span {
-	font-size: 0.875rem;
+	color: #FFF;
+	text-align: center;
+	font-size: 1.125rem;
+	font-style: normal;
 	font-weight: 300;
-	line-height: 1.35;
+	line-height: 1.875rem;
 }
 
 .loyalty-rewards__instructions {
@@ -1197,17 +1368,10 @@ Add all project-specific overrides and custom styles below.
 	}
 }
 
-@media only screen and (max-width: 399px) {
-	.loyalty-rewards__media {
-		grid-template-columns: repeat(2, minmax(0, 7rem));
-		gap: 1rem;
-	}
-}
-
 /* Testimonials */
 .testimonials-section {
-	padding-top: clamp(4rem, 8vw, 7rem);
-	padding-bottom: clamp(4rem, 8vw, 7rem);
+	padding-top: clamp(4rem, 8vw, 7.5rem);
+	padding-bottom: clamp(4rem, 8vw, 5.625rem);
 	background: var(--bubb-color-subtle);
 }
 
@@ -1225,8 +1389,9 @@ Add all project-specific overrides and custom styles below.
 
 .testimonials-section__title {
 	margin: 0;
-	font-size: clamp(2.75rem, 5vw, 4.5rem);
-	line-height: 1.05;
+	font-size: clamp(2rem, 5vw, 4.5rem);
+	text-transform: capitalize;
+	letter-spacing: -1.44px;
 }
 
 .testimonials-section__slider-wrap {
@@ -1234,7 +1399,7 @@ Add all project-specific overrides and custom styles below.
 	grid-template-columns: 2.5rem minmax(0, 52rem) 2.5rem;
 	align-items: center;
 	justify-content: center;
-	gap: clamp(1rem, 3vw, 2.5rem);
+	gap: clamp(1rem, 3vw, 1rem);
 	margin-top: 2rem;
 }
 
@@ -1249,7 +1414,10 @@ Add all project-specific overrides and custom styles below.
 
 .testimonial-card {
 	min-height: 18rem;
-	padding: clamp(2rem, 5vw, 4rem);
+	padding-top: 3rem;
+	padding-right: 4.0625rem;
+	padding-bottom: 3rem;
+	padding-left: 4.0625rem;
 	background: var(--bubb-color-light);
 	border-radius: 1.5rem;
 }
@@ -1266,7 +1434,7 @@ Add all project-specific overrides and custom styles below.
 }
 
 .testimonial-card__quote {
-	margin: 1rem 0 0;
+	margin: 2.625rem 0 0;
 	color: var(--bubb-color-secondary);
 	font-family: var(--bubb-font-body);
 	font-size: clamp(1.35rem, 2.5vw, 2rem);
@@ -1280,11 +1448,19 @@ Add all project-specific overrides and custom styles below.
 
 .testimonial-card__author {
 	display: flex;
-	align-items: baseline;
-	gap: 0.5rem;
+	align-items: center;
+	gap: .8125rem;
 	margin-top: 2.5rem;
 	color: var(--bubb-color-dark);
 	font-size: 0.875rem;
+}
+
+.testimonial-card__author .author-info {
+	color: #636160;
+	font-size: 16.025px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 22.893px;
 }
 
 .testimonial-card__author strong {
@@ -1295,7 +1471,45 @@ Add all project-specific overrides and custom styles below.
 	color: var(--bubb-color-secondary);
 }
 
+@media only screen and (max-width: 992px) {
+	.smart-media-content {
+		padding-top: 4.5rem;
+	}
+}
+
 @media only screen and (max-width: 767px) {
+	.hero-section {
+		margin-bottom: 1.125rem;
+		padding-bottom: 3.5rem;
+	}
+
+	.product-category-showcase {
+		padding-top: 1.5rem;
+	}
+	.smart-media-content {
+		padding-top: 2.5rem;
+	}
+	.product-category-showcase__title {
+		margin-top: 1.25rem;
+		font-size: 3rem;
+		letter-spacing: -2.1px;
+	}
+
+	.loyalty-rewards__title {
+		font-size: 3rem;
+	}
+	
+	.loyalty-rewards__media {
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.loyalty-rewards__artwork {
+		position: relative;
+		right: 0;
+		width: 100%;
+	}
+
 	.testimonials-section__slider-wrap {
 		grid-template-columns: 1fr;
 	}
@@ -1307,7 +1521,23 @@ Add all project-specific overrides and custom styles below.
 	.testimonial-card {
 		min-height: 0;
 		border-radius: 1rem;
+		padding-top: 2rem;
+		padding-right: 2rem;
+		padding-bottom: 2rem;
+		padding-left: 2rem;
 	}
+
+	.testimonial-card__quote {
+		margin: 1.625rem 0 0;
+	}
+	.testimonial-card__author {
+		margin-top: 1.5rem;
+	}
+
+	.testimonials-section {
+		padding-bottom: .625rem;
+	}
+
 }
 
 /* Footer */
@@ -1322,7 +1552,10 @@ Add all project-specific overrides and custom styles below.
 	grid-template-columns: 1.25fr 0.75fr 1fr 0.9fr;
 	gap: clamp(2rem, 5vw, 5rem);
 	align-items: start;
-	padding: clamp(2rem, 4vw, 3.75rem) clamp(1.5rem, 4vw, 4rem);
+	padding-top: 60px;
+	padding-right: 67px;
+	padding-bottom: 80px;
+	padding-left: 67px;
 	background: var(--bubb-color-primary);
 	border-radius: 1.5rem;
 }
@@ -1333,7 +1566,6 @@ Add all project-specific overrides and custom styles below.
 
 .footer-logo-link {
 	display: inline-block;
-	margin-bottom: 1rem;
 }
 
 .footer-logo {
@@ -1346,9 +1578,11 @@ Add all project-specific overrides and custom styles below.
 .footer-tagline,
 .footer-hours-list p,
 .footer-menu-list a {
-	color: rgba(255, 255, 255, 0.78);
-	font-size: 0.9375rem;
-	line-height: 1.55;
+	color: #FFF;
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 150%; 
 }
 
 .footer-tagline,
@@ -1356,29 +1590,31 @@ Add all project-specific overrides and custom styles below.
 	margin: 0;
 }
 
-.footer-hours-list p + p {
-	margin-top: 1rem;
-}
+
 
 .footer-menu-title,
 .footer-column-title {
-	margin: 0 0 0.75rem;
+	margin-bottom: 0;
 	color: var(--bubb-color-light);
 	font-family: var(--bubb-font-ui);
 	font-size: 1.25rem;
 	font-weight: 400;
 	letter-spacing: 0;
 }
-
-.footer-menu-list,
-.social-media-list {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+.footer-hours-list {
+	margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.375rem;
 }
 
-.footer-menu-list li + li {
-	margin-top: 0.75rem;
+.footer-menu-list{
+	margin-top: 7px;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
 
 .footer-menu-list a {
@@ -1392,16 +1628,18 @@ Add all project-specific overrides and custom styles below.
 .social-media-list {
 	display: flex;
 	align-items: center;
-	flex-wrap: wrap;
 	gap: 0.75rem;
+	list-style: none;
+	padding: 0;
+	margin-top: 18px;
 }
 
 .social-media-link {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 2.625rem;
-	height: 2.625rem;
+	width: 3.4644rem;
+	height: 3.4644rem;
 	color: var(--bubb-color-light);
 	background: rgba(255, 255, 255, 0.1);
 	border-radius: 50%;
@@ -1418,8 +1656,8 @@ Add all project-specific overrides and custom styles below.
 .social-media-icon,
 .social-media-svg {
 	display: block;
-	width: 1.25rem;
-	height: 1.25rem;
+	width: 1.4266rem;
+	height: 1.4266rem;
 	object-fit: contain;
 }
 

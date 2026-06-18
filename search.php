@@ -50,10 +50,14 @@ get_header();
 			while ( have_posts() ) :
 				the_post();
 
-				if ( 'product' === get_post_type() && function_exists( 'wc_get_template_part' ) ) {
+				if ( 'bubble_product' === get_post_type() ) {
 					$product_count++;
 					ob_start();
-					wc_get_template_part( 'content', 'product' );
+					if ( function_exists( 'bubble_stop_render_product_card' ) ) {
+						bubble_stop_render_product_card();
+					} else {
+						get_template_part( 'template-parts/content', 'product' );
+					}
 					$products_html .= ob_get_clean();
 					continue;
 				}
@@ -81,7 +85,7 @@ get_header();
 						<?php esc_html_e( 'Products', 'bubble-stop' ); ?>
 						<span class="search-results-group__count"><?php echo esc_html( number_format_i18n( $product_count ) ); ?></span>
 					</h2>
-					<div class="products card-grid columns-3 woocommerce">
+					<div class="products card-grid columns-3">
 						<?php echo $products_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</div>
 				</section>

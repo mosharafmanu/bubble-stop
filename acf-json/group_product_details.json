@@ -1,0 +1,60 @@
+{
+    "key": "group_product_details",
+    "title": "Product Details",
+    "fields": [
+        {
+            "key": "field_product_regular_price",
+            "label": "Regular Price",
+            "name": "regular_price",
+            "type": "text",
+            "instructions": "e.g. £5.50",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "£5.50",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_product_large_price",
+            "label": "Large Price",
+            "name": "large_price",
+            "type": "text",
+            "instructions": "e.g. £6.50",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "£6.50",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "bubble_product"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

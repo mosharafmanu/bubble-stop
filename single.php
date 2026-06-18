@@ -22,7 +22,9 @@ if ( is_singular() ) {
 			while ( have_posts() ) :
 				the_post();
 
-				if ( function_exists( 'have_rows' ) && have_rows( 'cms' ) ) :
+				if ( 'bubble_product' === get_post_type() ) :
+					get_template_part( 'template-parts/content', 'bubble_product' );
+				elseif ( function_exists( 'have_rows' ) && have_rows( 'cms' ) ) :
 					bubble_stop_flexible_content( 'cms' );
 				else :
 					get_template_part( 'template-parts/content', get_post_type() );
@@ -32,7 +34,11 @@ if ( is_singular() ) {
 					bubble_stop_render_back_to_blogs_button();
 				}
 
-				if ( comments_open() || get_comments_number() ) {
+				if ( function_exists( 'bubble_stop_render_back_to_products_button' ) && 'bubble_product' !== get_post_type() ) {
+					bubble_stop_render_back_to_products_button();
+				}
+
+				if ( 'bubble_product' !== get_post_type() && ( comments_open() || get_comments_number() ) ) {
 					echo '<div class="comments-wrap post-inner layout-padding mt-30 mt-md-40 mt-lg-50 pb-50 pb-md-70 pb-lg-100">';
 					comments_template();
 					echo '</div>';

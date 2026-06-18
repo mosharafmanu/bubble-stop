@@ -939,7 +939,7 @@
                                 },
                                 {
                                     "key": "field_loyalty_rewards_card_media_tab",
-                                    "label": "Media",
+                                    "label": "Action",
                                     "name": "",
                                     "aria-label": "",
                                     "type": "tab",
@@ -957,12 +957,12 @@
                                     "selected": 0
                                 },
                                 {
-                                    "key": "field_loyalty_rewards_card_qr",
-                                    "label": "QR Code",
-                                    "name": "qr_code",
+                                    "key": "field_loyalty_rewards_card_button",
+                                    "label": "Button",
+                                    "name": "join_button",
                                     "aria-label": "",
-                                    "type": "image",
-                                    "instructions": "Upload the QR code image.",
+                                    "type": "link",
+                                    "instructions": "Link for the 'Join for Free' button.",
                                     "required": 0,
                                     "conditional_logic": false,
                                     "wrapper": {
@@ -971,42 +971,7 @@
                                         "id": ""
                                     },
                                     "return_format": "array",
-                                    "preview_size": "medium",
-                                    "library": "all",
-                                    "mime_types": "jpg,jpeg,png,webp,svg",
-                                    "parent_repeater": "field_loyalty_rewards_cards",
-                                    "min_width": 0,
-                                    "min_height": 0,
-                                    "min_size": 0,
-                                    "max_width": 0,
-                                    "max_height": 0,
-                                    "max_size": 0
-                                },
-                                {
-                                    "key": "field_loyalty_rewards_card_artwork",
-                                    "label": "Reward Artwork",
-                                    "name": "reward_artwork",
-                                    "aria-label": "",
-                                    "type": "image",
-                                    "instructions": "Upload the cup or drink artwork.",
-                                    "required": 0,
-                                    "conditional_logic": false,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "return_format": "array",
-                                    "preview_size": "medium",
-                                    "library": "all",
-                                    "mime_types": "jpg,jpeg,png,webp,svg",
-                                    "parent_repeater": "field_loyalty_rewards_cards",
-                                    "min_width": 0,
-                                    "min_height": 0,
-                                    "min_size": 0,
-                                    "max_width": 0,
-                                    "max_height": 0,
-                                    "max_size": 0
+                                    "parent_repeater": "field_loyalty_rewards_cards"
                                 }
                             ]
                         }
@@ -1315,7 +1280,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "product"
+                "value": "bubble_product"
             }
         ]
     ],

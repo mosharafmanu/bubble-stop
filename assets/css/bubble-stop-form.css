@@ -95,7 +95,7 @@ select {
 	background-image: url(../svgs/select-arrow.svg);
 	background-repeat: no-repeat;
 	background-position: right 0.9375rem center;
-	background-size: 0.75rem;
+	background-size: 1rem;
 	padding-right: 3rem;
 }
 

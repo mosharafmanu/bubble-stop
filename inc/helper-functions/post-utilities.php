@@ -24,3 +24,28 @@ if ( ! function_exists( 'bubble_stop_render_back_to_blogs_button' ) ) {
 		<?php
 	}
 }
+
+if ( ! function_exists( 'bubble_stop_render_back_to_products_button' ) ) {
+	function bubble_stop_render_back_to_products_button( $args = [] ) {
+		if ( ! is_singular( 'bubble_product' ) ) {
+			return;
+		}
+
+		$defaults = [
+			'url'           => get_post_type_archive_link( 'bubble_product' ) ?: home_url( '/products/' ),
+			'text'          => __( '← Back to Products', 'bubble-stop' ),
+			'class'         => 'site-btn btn-outline',
+			'wrapper_class' => 'post-inner layout-padding pt-50 pt-md-70 pt-lg-70',
+		];
+		$args = wp_parse_args( $args, $defaults );
+		?>
+
+		<div class="<?php echo esc_attr( $args['wrapper_class'] ); ?>">
+			<a href="<?php echo esc_url( $args['url'] ); ?>" class="<?php echo esc_attr( $args['class'] ); ?>">
+				<?php echo esc_html( $args['text'] ); ?>
+			</a>
+		</div>
+
+		<?php
+	}
+}
