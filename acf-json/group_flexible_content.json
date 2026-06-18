@@ -8,7 +8,7 @@
             "name": "cms",
             "aria-label": "",
             "type": "flexible_content",
-            "instructions": "Build your page by adding and arranging content sections below. Each section is a modular layout component that you can customize independently. Drag sections to reorder them, and use the collapse\/expand controls to manage your workspace efficiently. <strong>Note:<\/strong> When using the Page Builder, the standard WordPress content editor is hidden and the 'Show Page Title' setting in the sidebar is ignored.",
+            "instructions": "Build your page by adding and arranging content sections below. Each section is a modular layout component that you can customize independently. Drag sections to reorder them, and use the collapse/expand controls to manage your workspace efficiently. <strong>Note:</strong> When using the Page Builder, the standard WordPress content editor is hidden and the 'Show Page Title' setting in the sidebar is ignored.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -109,7 +109,7 @@
                             },
                             "rows": 3,
                             "new_lines": "br",
-                            "placeholder": "Taiwanese bubble tea culture meets modern British café lifestyle.",
+                            "placeholder": "Taiwanese bubble tea culture meets modern British caf\u00e9 lifestyle.",
                             "default_value": "",
                             "maxlength": ""
                         },
@@ -136,7 +136,7 @@
                 "layout_smart_50_50_media_content": {
                     "key": "layout_smart_50_50_media_content",
                     "name": "smart_50_50_media_content",
-                    "label": "Smart 50\/50 Media Content",
+                    "label": "Smart 50/50 Media Content",
                     "display": "block",
                     "sub_fields": [
                         {
@@ -417,7 +417,7 @@
                                         "self_host": "Self-Hosted",
                                         "youtube": "YouTube",
                                         "vimeo": "Vimeo",
-                                        "cdn": "CDN \/ External URL"
+                                        "cdn": "CDN / External URL"
                                     },
                                     "default_value": "self_host",
                                     "return_format": "value",
@@ -512,7 +512,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "placeholder": "https:\/\/www.youtube.com\/watch?v=...",
+                                    "placeholder": "https://www.youtube.com/watch?v=...",
                                     "default_value": ""
                                 },
                                 {
@@ -888,7 +888,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "placeholder": "£3.50 Reward Value",
+                                    "placeholder": "\u00a33.50 Reward Value",
                                     "parent_repeater": "field_loyalty_rewards_cards",
                                     "default_value": "",
                                     "maxlength": "",
@@ -1254,6 +1254,125 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_delivery_partners": {
+                    "key": "layout_delivery_partners",
+                    "name": "delivery_partners",
+                    "label": "Delivery Partners",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_dp_heading",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "placeholder": "Prefer Delivery? Check out our delivery partners below"
+                        },
+                        {
+                            "key": "field_dp_partners",
+                            "label": "Partners",
+                            "name": "partners",
+                            "type": "repeater",
+                            "layout": "table",
+                            "button_label": "Add Partner",
+                            "sub_fields": [
+                                {
+                                    "key": "field_dp_image",
+                                    "label": "Image",
+                                    "name": "image",
+                                    "type": "image",
+                                    "return_format": "array",
+                                    "preview_size": "thumbnail"
+                                },
+                                {
+                                    "key": "field_dp_title",
+                                    "label": "Title",
+                                    "name": "title",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "field_dp_link",
+                                    "label": "Link",
+                                    "name": "link",
+                                    "type": "url"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "layout_location_hours": {
+                    "key": "layout_location_hours",
+                    "name": "location_hours",
+                    "label": "Location & Hours",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_lh_map_embed",
+                            "label": "Map Embed Code",
+                            "name": "map_embed",
+                            "type": "textarea",
+                            "instructions": "Paste the Google Maps iframe embed code here.",
+                            "rows": 4
+                        },
+                        {
+                            "key": "field_lh_heading",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "default_value": "Location & Hours"
+                        },
+                        {
+                            "key": "field_lh_store_name",
+                            "label": "Store Name",
+                            "name": "store_name",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_lh_address",
+                            "label": "Address",
+                            "name": "address",
+                            "type": "textarea",
+                            "rows": 3,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_lh_email",
+                            "label": "Email",
+                            "name": "email",
+                            "type": "email"
+                        },
+                        {
+                            "key": "field_lh_directions_link",
+                            "label": "Directions Link",
+                            "name": "directions_link",
+                            "type": "url",
+                            "instructions": "URL to Google Maps directions."
+                        },
+                        {
+                            "key": "field_lh_hours",
+                            "label": "Opening Hours",
+                            "name": "hours",
+                            "type": "repeater",
+                            "layout": "table",
+                            "button_label": "Add Day",
+                            "sub_fields": [
+                                {
+                                    "key": "field_lh_day",
+                                    "label": "Day",
+                                    "name": "day",
+                                    "type": "text",
+                                    "placeholder": "e.g. Monday"
+                                },
+                                {
+                                    "key": "field_lh_time",
+                                    "label": "Time",
+                                    "name": "time",
+                                    "type": "text",
+                                    "placeholder": "e.g. 11:00 - 20:30"
+                                }
+                            ]
+                        }
+                    ]
                 }
             },
             "min": "",

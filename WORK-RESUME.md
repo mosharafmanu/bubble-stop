@@ -30,6 +30,8 @@ Bubble Stop was transitioned from a WooCommerce-based store to a lightweight Wor
   - `smart_50_50_media_content`
   - `loyalty_rewards`
   - `testimonials`
+  - `delivery_partners`
+  - `location_hours`
 - **Responsive Media:** Custom responsive picture and video renderers.
 - **Breadcrumbs:** Custom implementation supporting Posts and Products.
 

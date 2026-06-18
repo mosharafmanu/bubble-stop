@@ -1699,3 +1699,142 @@ Add all project-specific overrides and custom styles below.
 		max-width: none;
 	}
 }
+
+/* Delivery Partners */
+.delivery-partners__title {
+	font-size: clamp(1.5rem, 3vw, 2.25rem);
+	font-weight: 600;
+	margin: 0;
+	color: var(--bubb-color-secondary);
+}
+
+.delivery-partners__grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: clamp(1.5rem, 4vw, 2rem);
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.delivery-partner-card {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+	transition: transform var(--bubb-transition);
+}
+
+a.delivery-partner-card:hover {
+	transform: translateY(-5px);
+}
+
+.delivery-partner-card__media {
+	aspect-ratio: 1.1 / 1;
+	overflow: hidden;
+	margin-bottom: 1.25rem;
+	background-color: #f7f7f7;
+}
+
+.delivery-partner-card__image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.delivery-partner-card__title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin: 0;
+	color: var(--bubb-color-secondary);
+}
+
+@media (max-width: 575px) {
+	.delivery-partners__grid {
+		grid-template-columns: 1fr;
+	}
+	
+	.delivery-partner-card__media {
+		aspect-ratio: 16 / 9;
+	}
+}
+
+/* Location & Hours */
+.location-hours__map {
+	width: 100%;
+	margin-bottom: clamp(2.5rem, 5vw, 4rem);
+	border-radius: 1.25rem;
+	overflow: hidden;
+}
+
+.location-hours__map iframe {
+	width: 100%;
+	height: clamp(300px, 40vw, 500px);
+	display: block;
+	border: 0;
+}
+
+.location-hours__content {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 2rem;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.location-hours__title {
+	font-size: clamp(2rem, 3vw, 2.5rem);
+	font-weight: 600;
+	margin: 0;
+	color: var(--bubb-color-secondary);
+}
+
+.location-hours__col-details p {
+	margin: 0 0 0.25rem;
+	font-size: 1.125rem;
+	color: var(--bubb-color-secondary);
+	line-height: 1.5;
+}
+
+.location-hours__email a,
+.location-hours__directions a {
+	color: var(--bubb-color-primary);
+	text-decoration: none;
+	transition: color var(--bubb-transition);
+}
+
+.location-hours__email a:hover,
+.location-hours__directions a:hover {
+	color: var(--bubb-color-dark);
+}
+
+.location-hours__directions {
+	margin-top: 1rem !important;
+}
+
+.location-hours__schedule {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	font-size: 1.125rem;
+	color: var(--bubb-color-secondary);
+}
+
+.location-hours__schedule li {
+	display: flex;
+	justify-content: flex-start;
+	gap: 2rem;
+	margin-bottom: 0.5rem;
+}
+
+.location-hours__schedule .day {
+	min-width: 110px;
+}
+
+@media (max-width: 991px) {
+	.location-hours__content {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+}
+
+
