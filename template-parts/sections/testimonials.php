@@ -13,7 +13,7 @@ if ( ! $testimonials || ! is_array( $testimonials ) ) {
 	return;
 }
 
-$section_id = wp_unique_id( 'testimonials-' );
+$section_id = 'testimonials';
 ?>
 
 <section id="<?php echo esc_attr( $section_id ); ?>" class="testimonials-section layout-padding">

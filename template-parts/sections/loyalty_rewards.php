@@ -12,7 +12,7 @@ if ( ! $cards || ! is_array( $cards ) ) {
 }
 ?>
 
-<section class="loyalty-rewards layout-padding">
+<section id="rewards" class="loyalty-rewards layout-padding">
 	<div class="loyalty-rewards__grid">
 		<?php foreach ( $cards as $card ) : ?>
 			<?php

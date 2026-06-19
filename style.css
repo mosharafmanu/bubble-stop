@@ -520,9 +520,19 @@ Add all project-specific overrides and custom styles below.
 	justify-content: center; */
 }
 
+.shop-category-block__carousel .slick-track {
+	display: flex;
+}
+
 .shop-category-block__carousel .slick-slide {
 	padding: 0 0.9375rem;
 	height: auto;
+	display: flex;
+}
+
+.shop-category-block__carousel .slick-slide > div {
+	height: 100%;
+	display: flex;
 }
 
 .shop-category-block__carousel .slick-list {
@@ -539,6 +549,7 @@ Add all project-specific overrides and custom styles below.
 	color: var(--bubb-color-primary);
 	font-size: 1.25rem;
 	font-weight: 300;
+	cursor: pointer;
 	transition: all 0.3s ease;
 }
 
@@ -578,6 +589,7 @@ Add all project-specific overrides and custom styles below.
 }
 
 .menu-product-card__body {
+	flex: 1;
 	padding: 1.25rem 0.5rem 0.5rem;
 	display: flex;
 	justify-content: space-between;
@@ -664,7 +676,7 @@ Add all project-specific overrides and custom styles below.
 
 .header-main-inner {
 	display: grid;
-	grid-template-columns: minmax(6rem, 1fr) auto minmax(6rem, 1fr);
+	grid-template-columns: minmax(6rem, 1fr) auto;
 	align-items: center;
 	min-height: 3.5rem;
 	padding: 0.4rem 2.625rem;
@@ -712,7 +724,7 @@ Add all project-specific overrides and custom styles below.
 }
 
 .main-navigation {
-	justify-self: center;
+	justify-self: end;
 }
 
 .main-menu,

@@ -34,8 +34,6 @@ wp_nav_menu([
 ?>
 		</nav>
 
-		<?php bubble_stop_render_header_actions(); ?>
-
 		<button class="mobile-menu-toggle" aria-controls="mobile-navigation" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle menu', 'bubble-stop'); ?>">
 			<span class="hamburger-line"></span>
 			<span class="hamburger-line"></span>

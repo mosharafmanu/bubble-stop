@@ -28,7 +28,8 @@ $section_classes = [
 ];
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<?php $section_id = sanitize_title( $heading ?: $eyebrow ); ?>
+<section id="<?php echo esc_attr( $section_id ); ?>" class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="smart-media-content__grid">
 		<?php if ( $has_media ) : ?>
 			<div class="smart-media-content__media">
