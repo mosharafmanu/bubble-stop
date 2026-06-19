@@ -1864,6 +1864,11 @@ Add all project-specific overrides and custom styles below.
 	.footer-card {
 		padding: 2rem;
 	}
+
+	.social-media-link {
+		width: 2.25rem;
+		height: 2.25rem;
+	}
 }
 
 @media only screen and (max-width: 575px) {
@@ -1929,6 +1934,21 @@ a.delivery-partner-card:hover {
 	font-weight: 600;
 	margin: 0;
 	color: var(--bubb-color-secondary);
+}
+
+@media (max-width: 767px) {
+	.delivery-partner-card {
+		padding: 1.5rem;
+		border-radius: 1.5rem;
+	}
+
+	.delivery-partner-card__title {
+		text-align: center;
+	}
+
+	.delivery-partner-card__media {
+		border-radius: 1.5rem;
+	}
 }
 
 @media (max-width: 575px) {
